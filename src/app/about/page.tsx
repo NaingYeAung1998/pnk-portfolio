@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styles from './styles.module.css'
-import Divier from '../components/divider'
+import Divider from '../components/divider'
 
 export default function About() {
     return (
@@ -21,7 +21,7 @@ export default function About() {
                 </div>
             </div>
 
-            <Divier />
+            <Divider />
 
             <div className='grid lg:grid-cols-3 py-[56px]'>
                 <div className='pr-[40px]'>
@@ -37,25 +37,25 @@ export default function About() {
                         <h1 className='text-[24px] text-[#8F969D] font-[510px]'>YEARS IN THE INDUSTRY</h1>
                     </div>
                     <IndustryExperienceComponent company='ESGPEDIA.IO' role='Product Designer' period='Dec 2023 - Apr 2025' link='' />
-                    <Divier />
+                    <Divider />
                     <IndustryExperienceComponent company='MO' role='UX Manager' period='Aug 2022 - Dec 2023' link='' />
-                    <Divier />
+                    <Divider />
                     <IndustryExperienceComponent company='ACEPLUS SOLUTIONS' role='Senior UX/UI Designer' period='Jan 2021 - Aug 2022' link='' />
-                    <Divier />
+                    <Divider />
                     <IndustryExperienceComponent company='CONCEPTX' role='UX/UI Designer' period='Aug 2019 - Dec 2020' link='' />
-                    <Divier />
+                    <Divider />
                     <IndustryExperienceComponent company='MR. BLUE KOREAN COMIC' role='Comic Artist' period='Sept 2018 - Jan 2019' link='' />
 
                 </div>
             </div>
 
-            <Divier />
+            <Divider />
 
             <div className='grid lg:grid-cols-3 py-[56px]'>
                 <div>
                     <h1 className='text-[24px] text-[#8F969D] font-[510px]'>WHAT I DO</h1>
                     <div className='flex gap-2'>
-                        <h1 className='text-[48px] text-[#111111] font-[400px] leading-[120px]'>Product Design</h1>
+                        <h1 className='text-[48px] text-[#111111] font-[400px] sm:leading-[120px]'>Product Design</h1>
                         <div className='w-[22px] h-[22px] rounded-full border text-center mt-[70px]'>1</div>
                     </div>
 
@@ -65,20 +65,92 @@ export default function About() {
                     <div className='h-[17px]'></div>
                     <p className='text-[16px] text-[#777777] leading-[24px] tracking-wider'>Combined with my experience of leading UX team and building products, I’ve grown into a full-fledged Product Designer who bridges creativity and strategy — using solid design foundations to deliver business impact.</p>
                     <div className='h-[40px]'></div>
-                    <div className='flex gap-4'>
-                        <div className='w-[40%]'>
-                            <ImageComponent title={'The Kite Runner'} src='/images/about-img-02.jpg' imgPosition='center' />
-                            <ImageComponent title={'The Kite Runner'} src='/images/about-img-02.jpg' imgPosition='center' />
+                    <div className='sm:flex gap-4'>
+                        <div className='sm:w-[40%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='207px' src='' isVideo={false} />
+                            <div className='h-[16px]'></div>
+                            <BentoImageComponent height='239px' src='' isVideo={false} />
                         </div>
-                        <div className='w-[30%]'>
-                            <ImageComponent title={'The Kite Runner'} src='/images/about-img-02.jpg' imgPosition='center' />
+                        <div className='sm:w-[30%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='462px' src='' isVideo={false} />
                         </div>
-                        <div className='w-[30%]'>
-                            <ImageComponent title={'The Kite Runner'} src='/images/about-img-02.jpg' imgPosition='center' />
+                        <div className='sm:w-[30%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='207px' src='' isVideo={false} />
+                            <div className='w-[100%] h-[239px] flex flex-col gap-2 items-center justify-center'>
+                                <ViewMoreComponent />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <Divider />
+
+            <div className='grid lg:grid-cols-3 py-[56px]'>
+                <div>
+                    <div className='flex gap-2'>
+                        <h1 className='text-[48px] text-[#111111] font-[400px] sm:leading-[120px]'>UI Interaction</h1>
+                        <div className='w-[22px] h-[22px] rounded-full border text-center mt-[70px]'>2</div>
+                    </div>
+
+                </div>
+                <div className='col-span-2 pt-[40px] lg:pt-[40px]'>
+                    <p className='text-[16px] text-[#777777] leading-[24px] tracking-wider'>From visualizing a feature to delivering the final product, prototypes play a crucial role in aligning the entire team toward a final goal. They are also serve as powerful tools for user testing and data collection, ensuring that our efforts create meaningful impacts.</p>
+                    <div className='h-[40px]'></div>
+                    <div className='sm:flex gap-4'>
+                        <div className='sm:w-[35%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='462px' src='' isVideo={false} />
+                        </div>
+                        <div className='sm:w-[35%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='462px' src='' isVideo={false} />
+                        </div>
+                        <div className='sm:w-[30%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='209px' src='' isVideo={false} />
+                            <div className='w-[100%] h-[239px] flex flex-col gap-2 items-center justify-center'>
+                                <ViewMoreComponent />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='h-[50px]'></div>
+                    <Divider />
+                </div>
+            </div>
+
+
+            <div className='grid lg:grid-cols-3 py-[56px]'>
+                <div>
+                    <div className='flex gap-2'>
+                        <h1 className='text-[48px] text-[#111111] font-[400px]'>3D Mockups, <br /> and Modeling</h1>
+                        <div className='w-[22px] h-[22px] rounded-full border text-center mt-[120px]'>3</div>
+                    </div>
+
+                </div>
+                <div className='col-span-2 pt-[40px] lg:pt-[20px]'>
+                    <p className='text-[16px] text-[#777777] leading-[24px] tracking-wider'>From visualizing a feature to delivering the final product, prototypes play a crucial role in aligning the entire team toward a final goal. They are also serve as powerful tools for user testing and data collection, ensuring that our efforts create meaningful impacts.</p>
+                    <div className='h-[40px]'></div>
+                    <div className='sm:flex gap-4'>
+                        <div className='sm:w-[45%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='287px' src='/images/3d-video-1.mp4' isVideo={true} />
+                            <div className='h-[16px]'></div>
+                            <BentoImageComponent height='287px' src='/images/3d-video-2.mp4' isVideo={true} />
+                        </div>
+                        <div className='sm:w-[25%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='206px' src='/images/3d-video-3.mp4' isVideo={true} />
+                            <div className='h-[16px]'></div>
+                            <BentoImageComponent height='368px' src='/images/3d-video-4.mp4' isVideo={true} />
+                        </div>
+                        <div className='sm:w-[30%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='334px' src='/images/3d-video-5.mp4' isVideo={true} />
+                            <div className='w-[100%] h-[239px] flex flex-col gap-2 items-center justify-center'>
+                                <ViewMoreComponent />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='h-[50px]'></div>
+                    <Divider />
+                </div>
+            </div>
+
         </div>
     )
 }
@@ -93,7 +165,7 @@ const ImageComponent: FC<ImageComponentProps> = ({ title, src, imgPosition }) =>
 
     return (
         <div className={`${styles.imageContainer} w-[100%] h-[222px] bg-[#F4F4F4] rounded-[16px] p-[12px] mt-[20px] sm:mt-[0px]`}>
-            <img src={src} className={`h-[168px] w-[100%] mb-[5px] object-cover object-${imgPosition}`} />
+            <img src={src} className={`h-[168px] w-[100%] mb-[5px] object-cover object-${imgPosition}`} style={{ objectPosition: imgPosition }} />
             <div className={`${styles.imageCaption} text-center w-[100%] text-[12px]`}>{title}</div>
         </div>
     )
@@ -113,5 +185,39 @@ const IndustryExperienceComponent: FC<IndustryExperienceComponentProps> = ({ com
             <h2 className='text-[16px] text-[#111111] leading-[24px] tracking-wider text-left ml-[40%] w-[50%]'>{role}</h2>
             <h2 className='text-[16px] text-[#777777] leading-[24px] tracking-wider text-right'>{period}</h2>
         </div>
+    )
+}
+
+
+type BentoImageComponentProps = {
+    height: string,
+    src: string,
+    isVideo: Boolean
+}
+
+const BentoImageComponent: FC<BentoImageComponentProps> = ({ height, src, isVideo }) => {
+    return (
+        <div className={`w-[100%] bg-[#F4F4F4] rounded-[16px] p-[24px] flex items-center`} style={{ height }}>
+            {
+                isVideo ?
+                    <video src={src} className='rounded-[16px]' width={'100%'} height={`${height} !important`} style={{ objectFit: 'cover', height: `${height} !important` }} /> :
+                    <img src={src} />
+            }
+        </div>
+    )
+}
+
+
+const ViewMoreComponent = () => {
+    return (
+        <>
+            <div className='flex'>
+                <div className='w-[65px] h-[65px] rounded-full border-[3px] border-[#111111] flex items-center justify-center'>
+                    <img src={'/icons/right-arrow.svg'} />
+                </div>
+                <div className='w-[14px] h-[14px] bg-[#D0D3D6] mt-[-5px] ml-[-5px]'></div>
+            </div>
+            <div className='text-[16px]'>View More</div>
+        </>
     )
 }
