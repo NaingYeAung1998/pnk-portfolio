@@ -151,6 +151,39 @@ export default function About() {
                 </div>
             </div>
 
+
+            <div className='grid lg:grid-cols-3 py-[56px]'>
+                <div>
+                    <div className='flex gap-2'>
+                        <h1 className='text-[48px] text-[#111111] font-[400px] sm:leading-[120px]'>Industrial Sektch</h1>
+                        <div className='w-[22px] h-[22px] rounded-full border text-center mt-[70px]'>4</div>
+                    </div>
+
+                </div>
+                <div className='col-span-2 pt-[40px] lg:pt-[40px]'>
+                    <p className='text-[16px] text-[#777777] leading-[24px] tracking-wider'>From visualizing a feature to delivering the final product, prototypes play a crucial role in aligning the entire team toward a final goal. They are also serve as powerful tools for user testing and data collection, ensuring that our efforts create meaningful impacts.</p>
+                    <div className='h-[40px]'></div>
+                    <div className='sm:flex gap-4'>
+                        <div className='sm:w-[35%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='590px' src='' isVideo={false} />
+                        </div>
+                        <div className='sm:w-[35%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='313px' src='' isVideo={false} />
+                            <div className='h-[16px]'></div>
+                            <BentoImageComponent height='261px' src='' isVideo={false} />
+                        </div>
+                        <div className='sm:w-[30%] my-[20px] sm:my-0'>
+                            <BentoImageComponent height='313px' src='' isVideo={false} />
+                            <div className='w-[100%] h-[261px] flex flex-col gap-2 items-center justify-center'>
+                                <ViewMoreComponent />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='h-[50px]'></div>
+                    <Divider />
+                </div>
+            </div>
+
         </div>
     )
 }
@@ -200,7 +233,21 @@ const BentoImageComponent: FC<BentoImageComponentProps> = ({ height, src, isVide
         <div className={`w-[100%] bg-[#F4F4F4] rounded-[16px] p-[24px] flex items-center`} style={{ height }}>
             {
                 isVideo ?
-                    <video src={src} className='rounded-[16px]' width={'100%'} height={`${height} !important`} style={{ objectFit: 'cover', height: `${height} !important` }} /> :
+                    <>
+                        <div className='relative'>
+                            <div className='absolute mt-[10px] ml-[10px] flex gap-3 items-center'>
+                                <PlayPauseButtonComponent />
+                                <VolumeButtonComponent />
+                                <div className='mt-[11px] ml-[50px]'>
+
+                                </div>
+                            </div>
+
+                            <video src={src} className='rounded-[16px]' width={'100%'} style={{ objectFit: 'cover', height: `${parseInt(height.split('x')[0]) - 40}px !important` }} />
+                        </div>
+
+                    </>
+                    :
                     <img src={src} />
             }
         </div>
@@ -219,5 +266,21 @@ const ViewMoreComponent = () => {
             </div>
             <div className='text-[16px]'>View More</div>
         </>
+    )
+}
+
+const PlayPauseButtonComponent = () => {
+    return (
+        <div className={`${styles.glassContainer} w-[40px] h-[40px] rounded-full text-white justify-center items-center cursor-pointer`} style={{ zIndex: 99 }}>
+            <img src={'/icons/pause.svg'} className='w-[12px] h-[14px]' />
+        </div>
+    )
+}
+
+const VolumeButtonComponent = () => {
+    return (
+        <div className={`${styles.glassContainer} w-[102px] h-[18px] rounded-full text-white p-[7px] flex`} style={{ zIndex: 99 }}>
+            <input type="range" min="1" max="5" value={4} id="myRange" className={`w-[85px] ${styles.slider}`}></input>
+        </div>
     )
 }

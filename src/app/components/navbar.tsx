@@ -28,7 +28,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div style={{ backgroundColor: scrolledDown ? 'black' : 'white' }} className="px-[32px] sticky top-0">
+            <div style={{ backgroundColor: scrolledDown ? 'black' : 'white', zIndex: 100 }} className="px-[32px] sticky top-0">
                 <div style={{ color: scrolledDown ? 'white' : 'black', borderColor: scrolledDown ? 'black' : '#D0D3D6' }} className="py-[20px] grid lg:grid-cols-5 items-center border-b border-b-[#D0D3D6] leading-tight">
                     <div className="align-left flex-col">
                         <div className="text-[#8F969D]">Portfolio</div>
