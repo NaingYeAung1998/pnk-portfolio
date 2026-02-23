@@ -31,7 +31,7 @@ export default function EsgCalculator() {
                     <div className="pb-[50px] flex justify-center items-center">
                         <img src={'/images/gold-achievement.png'} />
                     </div>
-                    <div className="flex gap-4" id="improvementSection">
+                    <div className="lg:flex gap-4" id="improvementSection">
                         <Improvement title="Avg. Time On Each Section" icon="/images/time.png" improvedNumber="19" improvedUnit="min" improvedFrom="From 36 min" improvedPercent="39% faster" />
                         <Improvement title="Task Completion Rate" icon="/images/checked.png" improvedNumber="90" improvedUnit="%" improvedFrom="Grow from 71%" improvedPercent="+28%" />
                         <Improvement title="Assistance Rate" icon="/images/headphone.png" improvedNumber="11" improvedUnit="%" improvedFrom="From 39%" improvedPercent="-28%" />
@@ -42,7 +42,7 @@ export default function EsgCalculator() {
                 <Divider />
                 <div id="customerExperienceSection" className="pt-[120px] pb-[120px]">
                     <h2 className={`text-[${FontSizes.medium}]`}>HOW OUR CUSTOMERS EXPERIENCE THE SOLUTION -</h2>
-                    <div className="pt-[40px] flex justify-between">
+                    <div className="pt-[40px] lg:flex justify-between">
                         <CustomerExperienceVideo link="https://www.youtube.com/embed/_QDthx_WjwE?si=Z8ZadHlV6saW_bVB" icon="/images/razor.png" title="Razer Inc."
                             content="“...helping us understand the questionnaire and
                                     also helped to make the whole user 
@@ -193,19 +193,28 @@ it is built in alignment with GHG protocol...”"
                             }
                             fullWidhtChildren={
                                 <div className="mt-[-15px]">
-                                    <div className="w-[800px] mb-[25px] lg:flex justify-between">
-                                        <div className="w-[300px] h-[235px] p-[25px] rounded-[32px] bg-[#F4F4F4] p-[16px]">
-                                            <div className="w-[100%] h-[100%] bg-white rounded-[28px] flex justify-center items-center">
-                                                <img src={"/images/esgpedia-logo.png"} />
-                                            </div>
-                                        </div>
-                                        <div className="w-[470px] h-[235px]">
-                                            <img src={"/images/esgpedia-cover.jpg"} className="w-[470px] h-[235px] rounded-[24px]" />
-                                        </div>
-                                    </div>
+                                    <img src={'/images/old-vs-new-ui.png'} width={"980px"} height={"850px"} />
                                 </div>
                             }
                         />
+                        <ContentDivider />
+                        <ContentContainer>
+                            <div className="flex gap-4 items-center">
+                                <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                <Title text="Overview - Conclusion" />
+                            </div>
+
+                            <ContentParagraph>This case study documents the full revamp of ESGpedia’s ESG Calculator, focused on improving accuracy, usability, and business outcomes.</ContentParagraph>
+                            <ContentParagraph>Through this project, I introduced a Human-Centered Design (HCD) process to the company, establishing a habit of user interviews and usability testing rather than relying on assumptions. This approach ensured that time and resources were invested in solving the right problems and delivering meaningful, measurable results when the product was launched. Read on to explore my approach, the key decisions I made, and the outcomes achieved by the end of the project.</ContentParagraph>
+                        </ContentContainer>
+                        <ContentContainer py={"0px"} isFull={true}>
+                            <ContentDivider isFull={true} />
+                        </ContentContainer>
+                        <ContentContainer>
+                            <Title text="Researches" />
+                            <ContentParagraph>With the context established, let’s move into researches. This section tells the story of how we listened to users and observed real behaviors through qualitative interviews, surveys, usability testing, diary studies, and Microsoft Clarity. Together, these methods helped uncover the frustrations, doubts, and hidden behaviors behind the numbers.</ContentParagraph>
+                        </ContentContainer>
+
                     </div>
 
                 </div>
@@ -240,8 +249,8 @@ type ImporvementPorps = {
 
 const Improvement: FC<ImporvementPorps> = ({ title, icon, improvedNumber, improvedUnit, improvedFrom, improvedPercent }) => {
     return (
-        <div className="w-[400px] h-[260px] bg-[#F4F4F4] rounded-[12px] py-[28px] px-[30px]">
-            <div className="flex gap-4">
+        <div className=" bg-[#F4F4F4] rounded-[12px] py-[28px] px-[30px]">
+            <div className="flex gap-4 justify-center items-center">
                 <img src={icon} width={'20px'} height={'18px'} />
                 <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>{title}</p>
             </div>
@@ -272,7 +281,7 @@ type CustomerExperienceVideoProps = {
 }
 const CustomerExperienceVideo: FC<CustomerExperienceVideoProps> = ({ link, icon, title, content, customer }) => {
     return (
-        <div className="w-[48%] border-[#E3E3E3] border-[1px] rounded-[12px]">
+        <div className="w-[100%] lg:w-[48%] border-[#E3E3E3] border-[1px] rounded-[12px]">
             <iframe width="100%" height="300" src={link} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             <div className="p-[43px]">
                 <div className="flex items-center gap-5">
@@ -346,7 +355,7 @@ const ContentContainer: FC<ContentContainerProps> = ({ children, isFull, py }) =
     return (
         <>
             {isFull ?
-                <div className="float-right flow-root">
+                <div className="float-right flow-root w-[100%]">
                     <div className={`w-[100%]`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }}>
                         {children}
                     </div>
@@ -370,7 +379,7 @@ type ContentDividerProps = {
 const ContentDivider: FC<ContentDividerProps> = ({ isFull }) => {
     return (
         isFull ?
-            <div className="float-right">
+            <div className="float-right flow-root w-[100%]">
                 <div className="w-[100%]" >
                     <Divider />
                 </div>
