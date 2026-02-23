@@ -41,9 +41,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${shadowsIntoLightFont.variable} ${sfProFont.className} `}>
       <body className={sfProFont.className}>
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

@@ -24,3 +24,13 @@ body {
   color: var(--foreground);
   font-size: 16px;
 }
+
+p {
+  letter-spacing: var(--tracking-wider);
+  /* 0.05em */
+}
+
+h2 {
+  letter-spacing: var(--tracking-wider);
+  /* 0.05em */
+}
