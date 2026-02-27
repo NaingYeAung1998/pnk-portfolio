@@ -225,6 +225,32 @@ it is built in alignment with GHG protocol...”"
                             fullWidhtChildren={
                                 <div className="mt-[-15px] float-right">
                                     <QualityQuestionSetsComponent />
+                                    <QuantityQuestionSetsComponent />
+                                </div>
+                            } />
+
+                        <ContentDivider />
+                        <HideableComponent title="Usability testing" children={
+                            <div className="pt-[40px]">
+                                <ContentParagraph>After preparing the Qualitative and Quantitative question sets, we now have to learn the real pain points of our calculator by doing the usability testing.</ContentParagraph>
+                                <ContentParagraph>Usability testing helps us observe how users actually interact with the ESG calculator — revealing hidden friction, confusion, or workflow issues that users might not articulate verbally.</ContentParagraph>
+                                <ContentParagraph>Since the feature was already available in our live app, we conducted the usability test using the real product. Below is a sample of our initial (pre-revamp) version, only for case study viewers to have a glimpse. </ContentParagraph>
+                            </div>
+                        }
+                            fullWidhtChildren={
+                                <div className="mt-[-15px] float-right">
+                                    <div className="w-[980px] h-[700px] bg-[#F4F4F4] p-[65px]">
+                                        <div className="w-[100%] h-[100%] border-[15px] rounded-[24px] border-black overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                            <img src={"/images/usability-website.png"} width={"100%"} />
+                                        </div>
+                                    </div>
+                                    <ContentContainer py="80px">
+                                        <ContentParagraph><ContentParagraph>Below is the testing plan, we used along side the live usabilitiy testing session. Participants will perform key tasks using the real product to identify any usability issues, workflow friction, or unclear interfaces. </ContentParagraph></ContentParagraph>
+                                    </ContentContainer>
+                                    <div className="float-right">
+                                        <UsabilityTestingPlanComponent />
+                                    </div>
+
                                 </div>
                             } />
 
@@ -253,10 +279,12 @@ const QualityQuestionSetsComponent = () => {
                             <img src={"/images/arrow-outward.png"} />
                         </div>
                     </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the qualitative interview questions
+                            that informed our understanding of user behavior and
+                            decision-making.</ContentParagraph>
+                    </div>
 
-                    <ContentParagraph>Tap here to explore the qualitative interview questions
-                        that informed our understanding of user behavior and
-                        decision-making.</ContentParagraph>
                 </div>
             </div>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
@@ -268,7 +296,7 @@ const QualityQuestionSetsComponent = () => {
                             </ModalHeader>
                             <ModalBody>
                                 <div className="bg-[#F4F4F4] p-[30px]">
-                                    <div className="flex justify-between h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                    <div className="flex justify-between h-[450px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                                         <div className="w-[48%] h-fit bg-white rounded-[24px] py-[30px] px-[20px]">
                                             <div className="flex justify-between items-center">
                                                 <p className={`text-[${FontSizes.small}] text-[${Colors.title}] font-thin`}>Interview For <span className="text-[#FF5B5B]">Existing Users</span></p>
@@ -286,16 +314,17 @@ const QualityQuestionSetsComponent = () => {
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Usability & Workflow</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How easy or difficult is it for you to input data into the tool?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you face any confusion or difficulty while entering the data?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What part of the process took the most time or effort?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you need help from teammates or consultants while using the tool?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Data Accuracy & Trust</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How confident were you in the results generated by the calculator?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you verify any of the outputs manually or compare them with other  tools and spreadsheets?</p> </ContentList>
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
@@ -331,9 +360,16 @@ const QualityQuestionSetsComponent = () => {
                                             <ContentDivider isFull={true} />
 
                                             <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you share a bit about your company’s current ESG or carbon reporting process?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How does your company currently handle ESG or carbon data collection and reporting?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Have you evaluated or considered any ESG or carbon tools in the past? Why or why not?</p> </ContentList>
+
+                                            <ContentDivider isFull={true} />
+
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Awareness & Perception</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When you hear “ESG calculator,” what comes to mind?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What do you think are the biggest challenges in collecting or calculating ESG data today?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Have you explored or heard about similar ESG or carbon tools?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
@@ -362,13 +398,179 @@ const QualityQuestionSetsComponent = () => {
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
 
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const QuantityQuestionSetsComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div>
+                    <img src={"/images/quantity-research.png"} height={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Quantitative Question Sets</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to review the quantitative survey questions
+                            used to evaluate usability, confidence, and performance
+                            throughout the ESG assessment.</ContentParagraph>
+                    </div>
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Quantitative Question Set</p>
+                            </ModalHeader>
+                            <ModalBody>
+                                <div className="bg-[#F4F4F4] p-[30px]">
+                                    <div className="h-[450px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <div className="w-[100%] h-[435px] bg-white p-[30px] rounded-[24px] flex justify-center">
+                                            <img src={"/images/quantity-1.png"} />
+                                        </div>
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] h-[435px] bg-white p-[30px] rounded-[24px] flex justify-center">
+                                            <img src={"/images/quantity-3.png"} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const UsabilityTestingPlanComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div>
+                    <img src={"/images/usability-testing.png"} height={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Usability Testing Plan</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the detailed empathy map
+                            and understand users’ thoughts, behaviors, and
+                            emotions throughout the journey.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Quantitative Question Set</p>
+                            </ModalHeader>
+                            <ModalBody>
+                                <div className="bg-[#F4F4F4] p-[20px]">
+                                    <div className="h-[450px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
                                             <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Testing Objectives
+                                            </h2>
+                                            <ContentList>Evaluate whether users can complete a carbon or ESG calculation
+                                                without guidance.</ContentList>
+                                            <ContentList>Identify steps that are confusing, slow, or error-prone.</ContentList>
+                                            <ContentList>Test clarity of inputs, units, frameworks, and output results.</ContentList>
+                                        </div>
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Participant Types and Numbers
+                                            </h2>
+                                            <ContentList>Internal Stakeholders, and potential users from SMEs or corporates.</ContentList>
+                                            <ContentList>5–7 users for initial round (3 internal, 4 potential).</ContentList>
+                                        </div>
+
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Objectives
+                                            </h2>
+                                            <ContentParagraph>Entering Company Data</ContentParagraph>
+                                            <ContentList>Can the user identify what information is required before starting?</ContentList>
+                                            <ContentList>Do they understand data formats and units?</ContentList>
+
+                                            <ContentParagraph>Inputting Emission Data</ContentParagraph>
+                                            <ContentList>Can they enter Scope 1, 2, or 3 data correctly?</ContentList>
+                                            <ContentList>Do they understand terms like “tCO₂e” or “GHG Protocol”?</ContentList>
+
+                                            <ContentParagraph>Understanding the Results</ContentParagraph>
+                                            <ContentList>Can they interpret the results easily (graphs, metrics, or summary)?</ContentList>
+                                            <ContentList>Do they understand whether results are good/bad or need action?</ContentList>
+                                        </div>
+
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Key Task for Participants
+                                            </h2>
+                                            <ContentList>Imagine you’re preparing your company’s ESG report. Log in and locate the
+                                                ESG Calculator feature.</ContentList>
+                                            <ContentList>Add data for Scope 1, Scope 2, and Scope 3 emissions.</ContentList>
+                                            <ContentList>Change the data unit (e.g., from “kg CO₂e” to “tonnes CO₂e”) and confirm
+                                                whether the values update correctly.</ContentList>
+                                            <ContentList>If you’re unsure what this term means, where would you go for help?</ContentList>
+                                            <ContentList>After results appear, ask: “Can you explain what this number means?”</ContentList>
+                                        </div>
+
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Post-test Questions
+                                            </h2>
+                                            <ContentList>How easy or difficult was it to complete the tasks?</ContentList>
+                                            <ContentList>What part of the calculator felt confusing or time-consuming?</ContentList>
+                                            <ContentList>How confident do you feel about the accuracy of your input data?</ContentList>
+                                            <ContentList>If you could change one thing about this tool, what would it be?</ContentList>
+                                            <ContentList>Would you use this tool again for your next ESG report?</ContentList>
                                         </div>
                                     </div>
                                 </div>
