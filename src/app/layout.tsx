@@ -4,7 +4,7 @@ import "./globals.css";
 import localFont from 'next/font/local';
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import { HeroUIProvider } from "@heroui/react";
+import { ThemeProvider } from "./themeProvider";
 
 
 const geistSans = Geist({
@@ -45,9 +45,9 @@ export default function RootLayout({
 
       <body className={sfProFont.className}>
         {/* <Navbar /> */}
-        <HeroUIProvider>
+        <ThemeProvider>
           {children}
-        </HeroUIProvider>
+        </ThemeProvider>
 
         {/* <Footer /> */}
       </body>
