@@ -30,11 +30,11 @@ body {
 }
 
 p {
-  letter-spacing: var(--tracking-wider);
+  letter-spacing: var(--tracking-widest);
   /* 0.05em */
 }
 
 h2 {
-  letter-spacing: var(--tracking-wider);
+  letter-spacing: var(--tracking-widest);
   /* 0.05em */
 }

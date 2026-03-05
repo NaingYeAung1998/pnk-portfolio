@@ -3,9 +3,98 @@
 import Divider from "@/app/components/divider"
 import { Colors, FontSizes } from "@/app/constants/constants"
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/modal"
-import React, { FC, useEffect, useRef, useState } from "react"
+import React, { FC, useEffect, useMemo, useRef, useState } from "react"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider, { Settings } from "react-slick";
+import SliderWrapper from "./slider.style";
+import { throttle } from 'lodash';
+
+
+const achieveSliderSetting: Settings = {
+    dots: true,
+    infinite: false,
+    autoplay: false,
+    centerPadding: "20px",
+    appendDots: dots => <ul>{dots}</ul>,
+    customPaging: i => (
+        <div className="ft-slick__dots--custom">
+            <div className="loading" />
+        </div>
+    )
+}
+
+const navigations = [
+    {
+        title: 'INTRODUCTION',
+        id: 'introduction',
+    },
+    {
+        title: 'OVERVIEW',
+        id: 'overview',
+    },
+    {
+        title: 'RESEARCHES',
+        id: 'researches',
+    },
+    {
+        title: 'PROBLEM DEFINE',
+        id: 'problemDefine',
+    },
+    {
+        title: 'IDEATION',
+        id: 'ideation',
+    },
+    {
+        title: 'FINAL SOLUTION',
+        id: 'finalSolution',
+    },
+    {
+        title: 'CHALLENGE',
+        id: 'challenge',
+    },
+    {
+        title: 'IMPACT',
+        id: 'impact',
+    },
+    {
+        title: 'RETROSPECTIVE',
+        id: 'retrospective',
+    }
+]
 
 export default function EsgCalculator() {
+    const [currentNavigation, setCurrentNavigation] = useState("introduction");
+    const navRefs = useRef(new Array(navigations.length));
+
+    const checkVisibility = () => {
+        navigations.forEach((nav, index) => {
+            const section = navRefs.current[index];
+            if (!section) return;
+
+            const rect = section.getBoundingClientRect();
+
+            const isVisible = (rect.top + rect.height / 2) > 0 && rect.top < window.innerHeight / 2;
+
+            if (isVisible) {
+                setCurrentNavigation(nav.id);
+            } else {
+                let currentNavigatedIndex = navigations.findIndex(x => x.id == currentNavigation);
+                if (currentNavigatedIndex > 0) {
+                    setCurrentNavigation(navigations[currentNavigatedIndex - 1].id)
+                }
+            }
+        });
+    };
+
+    const throttledCheck = useMemo(() => throttle(checkVisibility, 300), []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', throttledCheck);
+        return () => {
+            window.removeEventListener('scroll', throttledCheck);
+        };
+    }, []);
 
     return (
         <div className="bg-white" >
@@ -28,18 +117,48 @@ export default function EsgCalculator() {
             </div>
 
             <div className="px-[100px]" id="contentSection">
-                <div id="achievementSection" className="pt-[120px] pb-[120px]">
-                    <div className="pb-[50px] flex justify-center items-center">
-                        <img src={'/images/gold-achievement.png'} />
-                    </div>
-                    <div className="lg:flex gap-4" id="improvementSection">
-                        <Improvement title="Avg. Time On Each Section" icon="/images/time.png" improvedNumber="19" improvedUnit="min" improvedFrom="From 36 min" improvedPercent="39% faster" />
-                        <Improvement title="Task Completion Rate" icon="/images/checked.png" improvedNumber="90" improvedUnit="%" improvedFrom="Grow from 71%" improvedPercent="+28%" />
-                        <Improvement title="Assistance Rate" icon="/images/headphone.png" improvedNumber="11" improvedUnit="%" improvedFrom="From 39%" improvedPercent="-28%" />
-                        <Improvement title="SUS Scores" icon="/images/meter.png" improvedNumber="82" improvedUnit="/100" improvedFrom="From 54" improvedPercent="+28" />
-                    </div>
+                <SliderWrapper>
+                    <Slider {...achieveSliderSetting}>
+                        <div id="achievementSection" className="pt-[120px] pb-[120px]">
+                            <div className="pb-[50px] flex justify-center items-center">
+                                <img src={'/images/gold-achievement.png'} />
+                            </div>
+                            <div className="lg:flex gap-4 justify-between" id="improvementSection">
+                                <Improvement title="Avg. Time On Each Section" icon="/images/time.png" improvedNumber="19" improvedUnit="min" improvedFrom="From 36 min" improvedPercent="39% faster" />
+                                <Improvement title="Task Completion Rate" icon="/images/checked.png" improvedNumber="90" improvedUnit="%" improvedFrom="Grow from 71%" improvedPercent="+28%" />
+                                <Improvement title="Assistance Rate" icon="/images/headphone.png" improvedNumber="11" improvedUnit="%" improvedFrom="From 39%" improvedPercent="-28%" />
+                                <Improvement title="SUS Scores" icon="/images/meter.png" improvedNumber="82" improvedUnit="/100" improvedFrom="From 54" improvedPercent="+28" />
+                            </div>
 
-                </div>
+                        </div>
+                        <div id="achievementSection" className="pt-[120px] pb-[120px]">
+                            <div className="pb-[50px] flex justify-center items-center">
+                                <img src={'/images/silver-achievement.png'} />
+                            </div>
+                            <div className="lg:flex gap-4 justify-between" id="improvementSection">
+                                <Improvement title="Data Error Rate" icon="/images/error.png" improvedNumber="12" improvedUnit="%" improvedFrom="From 40%" improvedPercent="28% drop" />
+                                <Improvement title="Range Click Level" icon="/images/cursor.png" improvedNumber="25" improvedUnit="%" improvedFrom="From 64%" improvedPercent="39% drop" />
+                                <Improvement title="Framework Understanding" icon="/images/framework.png" improvedNumber="77" improvedUnit="%" improvedFrom="From 52%" improvedPercent="+25% raise" />
+                                <Improvement title="Confidence In Results" icon="/images/star.png" improvedNumber="87" improvedUnit="%" improvedFrom="From 64%" improvedPercent="+23% raise" />
+                            </div>
+
+                        </div>
+                        <div id="achievementSection" className="pt-[120px] pb-[120px]">
+                            <div className="pb-[50px] flex justify-center items-center">
+                                <img src={'/images/bronze-achievement.png'} />
+                            </div>
+                            <div className="lg:flex gap-4 justify-between" id="improvementSection">
+                                <Improvement title="Drop-off Rate" icon="/images/dropoff.png" improvedNumber="15" improvedUnit="%" improvedFrom="From 43%" improvedPercent="-28%" />
+                                <Improvement title="Retention/Reuse Intention" icon="/images/rotate.png" improvedNumber="29" improvedUnit="%" improvedFrom="From 68%" improvedPercent="+21% raise" />
+                                <Improvement title="Scroll Depth" icon="/images/scroll.png" improvedNumber="<28" improvedUnit="%" improvedFrom="From 58%" improvedPercent="-30%" />
+                                <Improvement title="Avg. Satisfaction Level" icon="/images/level.png" improvedNumber="83" improvedUnit="%" improvedFrom="From 55%" improvedPercent="+28 raise" />
+                            </div>
+
+                        </div>
+                    </Slider>
+                </SliderWrapper>
+
+
                 <Divider />
                 <div id="customerExperienceSection" className="pt-[120px] pb-[120px]">
                     <h2 className={`text-[${FontSizes.medium}]`}>HOW OUR CUSTOMERS EXPERIENCE THE SOLUTION -</h2>
@@ -51,215 +170,302 @@ export default function EsgCalculator() {
                             customer="Kenneth Ng, Global Sustainability Lead" />
                         <CustomerExperienceVideo link="https://www.youtube.com/embed/g6UxU677DiE?si=AwONnUvlBZ4DE1DI" icon="/images/dp.png" title="Durapower Group"
                             content="“...Calculator improves the accuracy and credibility
-of emissions tracking across our value chain,as
-it is built in alignment with GHG protocol...”"
+                                    of emissions tracking across our value chain,as
+                                    it is built in alignment with GHG protocol...”"
                             customer="Lay See Tan, Group CFO and Sustainability Officer" />
                     </div>
                 </div>
                 <Divider />
                 <div className="pt-[120px]">
                     <div className="w-[20%] sticky top-[50px] left-20">
-                        <Navigation text="INTRODUCTION" isActive />
-                        <Navigation text="OVERVIEW" />
-                        <Navigation text="RESEARCHES" />
-                        <Navigation text="PROBLEM DEFINE" />
-                        <Navigation text="IDEATION" />
-                        <Navigation text="FINAL SOLUTION" />
-                        <Navigation text="CHALLENGE" />
-                        <Navigation text="IMPACT" />
-                        <Navigation text="RETROSPECTIVE" />
+                        {
+                            navigations.map((nav) =>
+                                <Navigation key={nav.id} text={nav.title} isActive={nav.id == currentNavigation} />
+                            )
+                        }
                     </div>
-                    <div className="w-[80%] ml-[20%] mt-[-550px] flow-root">
-                        <ContentContainer>
-                            <Title text="Introduction" />
-                            <ContentParagraph>ESGpedia is a company I joined in December 2023, and the ESG Calculator was the first project I was responsible for delivering with improved results. This tool evaluates a company’s </ContentParagraph>
-                            <ContentList><span className="text-[black]">Environmental</span> impact (such as greenhouse gas emissions and resource use)</ContentList>
-                            <ContentList><span className="text-[black]">Social</span> practices toward employees, customers, and communities, and</ContentList>
-                            <ContentList><span className="text-[black]">Governance</span> standards, including transparency, compliance, ethics, and accountability.</ContentList>
+                    <ContentSectionWrapper>
+                        <div className="mt-[-550px]" ref={(nav) => { if (nav) { navRefs.current[0] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Introduction" />
+                                <ContentParagraph>ESGpedia is a company I joined in December 2023, and the ESG Calculator was the first project I was responsible for delivering with improved results. This tool evaluates a company’s </ContentParagraph>
+                                <ContentList><span className="text-[black]">Environmental</span> impact (such as greenhouse gas emissions and resource use)</ContentList>
+                                <ContentList><span className="text-[black]">Social</span> practices toward employees, customers, and communities, and</ContentList>
+                                <ContentList><span className="text-[black]">Governance</span> standards, including transparency, compliance, ethics, and accountability.</ContentList>
 
-                        </ContentContainer>
-                        <ContentDivider />
-                        <ContentContainer>
-                            <Title text="Business problems (or) product north stars" />
-                            <ContentParagraph>Above are the early signals that something wasn’t working as expected. These revealed three core business problems that needed to be addressed —</ContentParagraph>
-                            <ContentParagraph><span className="text-[black]">Ease of use</span> - High support requests increased operational costs and reduced user self-sufficiency.</ContentParagraph>
-                            <ContentParagraph><span className="text-[black]">Low confidence in data accuracy</span> - Users doubted the reliability of the results, weakening the product’s core value proposition and sales potential.</ContentParagraph>
-                            <ContentParagraph><span className="text-[black]">Drop-offs and Poor retention</span> - Friction during data input and framework selection led to abandonment, limiting adoption, repeat usage, and overall business impact.</ContentParagraph>
-                            <div className="flex gap-4">
-                                <BusinessProblemCard icon="/images/cake.png" text="1. Ease of use" />
-                                <BusinessProblemCard icon="/images/file_box.png" text="2. Low confidence in data accuracy" />
-                                <BusinessProblemCard icon="/images/boomerang.png" text="3. Drop-offs and poor retention" />
-                            </div>
-                            <div className="pt-[120px]" id="expTableSection">
-                                <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Year</p>} valueChildren={<p className={`text-[${Colors.content}]`}>2023</p>} />
-                                <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Timeline</p>} valueChildren={<p className={`text-[${Colors.content}]`}>12 weeks</p>} />
-                                <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>My Role</p>} valueChildren={<p className={`text-[${Colors.title}]`}>Lead Product Designer</p>} />
-                                <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Contributors</p>}
-                                    valueChildren={<><p className={`text-[${Colors.content}] pb-[10px]`}>VP of Product</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Chief Technology Office</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Technical Product Manager</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Business and Sales Team</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Data Analyst</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Backend Team members</p>
-                                        <p className={`text-[${Colors.content}] pb-[10px]`}>Frontend Engineering Team</p>
-                                    </>} />
-                            </div>
-
-                        </ContentContainer>
-                        <ContentDivider />
-                        <ContentContainer>
-                            <Title text="Overview" />
-                            <ContentParagraph>First, we step back to understand the broader context. This section provides background on ESGpedia, explains what ESG means in practice, and outlines how the ESG Calculator fits into the overall ecosystem. It also clarifies the project scope, constraints, stakeholders involved, and my role in leading the revamp end to end.</ContentParagraph>
-                        </ContentContainer>
-                        <ContentDivider />
-
-                        <HideableComponent title="What is ESG?"
-                            children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>ESG stands for Environmental, Social, and Governance, a set of standards used to measure a company's impact on the environment and society, and how transparently it is managed.</ContentParagraph>
-                                    <ContentParagraph>By supporting Singapore’s Green Plan 2030, ESG builds trust with customers and partners, boosts innovation, and ensures long-term success in a world that values sustainability.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+                            <ContentContainer>
+                                <Title text="Business problems (or) product north stars" />
+                                <ContentParagraph>Above are the early signals that something wasn’t working as expected. These revealed three core business problems that needed to be addressed —</ContentParagraph>
+                                <ContentParagraph><span className="text-[black]">Ease of use</span> - High support requests increased operational costs and reduced user self-sufficiency.</ContentParagraph>
+                                <ContentParagraph><span className="text-[black]">Low confidence in data accuracy</span> - Users doubted the reliability of the results, weakening the product’s core value proposition and sales potential.</ContentParagraph>
+                                <ContentParagraph><span className="text-[black]">Drop-offs and Poor retention</span> - Friction during data input and framework selection led to abandonment, limiting adoption, repeat usage, and overall business impact.</ContentParagraph>
+                                <div className="flex gap-4">
+                                    <BusinessProblemCard icon="/images/cake.png" text="1. Ease of use" />
+                                    <BusinessProblemCard icon="/images/file_box.png" text="2. Low confidence in data accuracy" />
+                                    <BusinessProblemCard icon="/images/boomerang.png" text="3. Drop-offs and poor retention" />
                                 </div>
-                            }
-                            fullWidhtChildren={
-                                <div className="mt-[-15px] float-right">
-                                    <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                        <div className="p-[25px]">
-                                            <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Environmental</h2>
-                                            <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                        </div>
-                                        <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                            <ContentList><span className="text-black">Carbon emissions and energy consumption</span></ContentList>
-                                            <ContentList><span className="text-black">Waste management and pollution</span></ContentList>
-                                            <ContentList><span className="text-black">Use of natural resources and biodiversity</span></ContentList>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                        <div className="p-[25px]">
-                                            <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Social</h2>
-                                            <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                        </div>
-                                        <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                            <ContentList><span className="text-black">Labor practices, diversity, and inclusion</span></ContentList>
-                                            <ContentList><span className="text-black">Human rights and supply chain management</span></ContentList>
-                                            <ContentList><span className="text-black">Community relations and customer satisfaction</span></ContentList>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                        <div className="p-[25px]">
-                                            <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Governance</h2>
-                                            <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                        </div>
-                                        <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                            <ContentList><span className="text-black">Board composition and structure</span></ContentList>
-                                            <ContentList><span className="text-black">Executive compensation</span></ContentList>
-                                            <ContentList><span className="text-black">Internal controls and audits</span></ContentList>
-                                            <ContentList><span className="text-black">Business ethics and transparency</span></ContentList>
-                                        </div>
-                                    </div>
+                                <div className="pt-[120px]" id="expTableSection">
+                                    <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Year</p>} valueChildren={<p className={`text-[${Colors.content}]`}>2023</p>} />
+                                    <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Timeline</p>} valueChildren={<p className={`text-[${Colors.content}]`}>12 weeks</p>} />
+                                    <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>My Role</p>} valueChildren={<p className={`text-[${Colors.title}]`}>Lead Product Designer</p>} />
+                                    <ExperienceRow labelChildren={<p className={`text-[${Colors.content}]`}>Contributors</p>}
+                                        valueChildren={<><p className={`text-[${Colors.content}] pb-[10px]`}>VP of Product</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Chief Technology Office</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Technical Product Manager</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Business and Sales Team</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Data Analyst</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Backend Team members</p>
+                                            <p className={`text-[${Colors.content}] pb-[10px]`}>Frontend Engineering Team</p>
+                                        </>} />
                                 </div>
-                            }
-                        />
+
+                            </ContentContainer>
+                        </div>
                         <ContentDivider />
-                        <HideableComponent title="Who is ESGpedia?"
-                            children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>ESGpedia is a Singapore-headquartered ESG data and technology company that provides a one-stop digital platform designed to help businesses, SMEs, and financial institutions across the Asia-Pacific region measure, manage, and report on Environmental, Social, and Governance (ESG) performance.</ContentParagraph>
-                                    <ContentParagraph>The platform aggregates millions of sustainability data points and offers end-to-end solutions such as carbon accounting, ESG reporting, supply chain engagement, and sustainable finance tools, enabling organizations to comply with global and local standards, improve transparency, and support initiatives like the Asia-Pacific Single Accesspoint for ESG Data (SAFE) and the ESCAP Sustainable Business Network (ESBN) Asia-Pacific Green Deal.</ContentParagraph>
-                                </div>
-                            }
-                            fullWidhtChildren={
-                                <div className="mt-[-15px] float-right">
-                                    <div className="w-[800px] mb-[25px] lg:flex justify-between">
-                                        <div className="w-[300px] h-[235px] p-[25px] rounded-[32px] bg-[#F4F4F4] p-[16px]">
-                                            <div className="w-[100%] h-[100%] bg-white rounded-[28px] flex justify-center items-center">
-                                                <img src={"/images/esgpedia-logo.png"} />
+                    </ContentSectionWrapper>
+
+
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[1] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Overview" />
+                                <ContentParagraph>First, we step back to understand the broader context. This section provides background on ESGpedia, explains what ESG means in practice, and outlines how the ESG Calculator fits into the overall ecosystem. It also clarifies the project scope, constraints, stakeholders involved, and my role in leading the revamp end to end.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+
+                            <HideableComponent title="What is ESG?"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>ESG stands for Environmental, Social, and Governance, a set of standards used to measure a company's impact on the environment and society, and how transparently it is managed.</ContentParagraph>
+                                        <ContentParagraph>By supporting Singapore’s Green Plan 2030, ESG builds trust with customers and partners, boosts innovation, and ensures long-term success in a world that values sustainability.</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
+                                            <div className="p-[25px]">
+                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Environmental</h2>
+                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
+                                            </div>
+                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                                                <ContentList><span className="text-black">Carbon emissions and energy consumption</span></ContentList>
+                                                <ContentList><span className="text-black">Waste management and pollution</span></ContentList>
+                                                <ContentList><span className="text-black">Use of natural resources and biodiversity</span></ContentList>
                                             </div>
                                         </div>
-                                        <div className="w-[470px] h-[235px]">
-                                            <img src={"/images/esgpedia-cover.jpg"} className="w-[470px] h-[235px] rounded-[24px]" />
+
+                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
+                                            <div className="p-[25px]">
+                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Social</h2>
+                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
+                                            </div>
+                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                                                <ContentList><span className="text-black">Labor practices, diversity, and inclusion</span></ContentList>
+                                                <ContentList><span className="text-black">Human rights and supply chain management</span></ContentList>
+                                                <ContentList><span className="text-black">Community relations and customer satisfaction</span></ContentList>
+                                            </div>
+                                        </div>
+
+                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
+                                            <div className="p-[25px]">
+                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Governance</h2>
+                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
+                                            </div>
+                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                                                <ContentList><span className="text-black">Board composition and structure</span></ContentList>
+                                                <ContentList><span className="text-black">Executive compensation</span></ContentList>
+                                                <ContentList><span className="text-black">Internal controls and audits</span></ContentList>
+                                                <ContentList><span className="text-black">Business ethics and transparency</span></ContentList>
+                                            </div>
                                         </div>
                                     </div>
+                                }
+                            />
+                            <ContentDivider />
+                            <HideableComponent title="Who is ESGpedia?"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>ESGpedia is a Singapore-headquartered ESG data and technology company that provides a one-stop digital platform designed to help businesses, SMEs, and financial institutions across the Asia-Pacific region measure, manage, and report on Environmental, Social, and Governance (ESG) performance.</ContentParagraph>
+                                        <ContentParagraph>The platform aggregates millions of sustainability data points and offers end-to-end solutions such as carbon accounting, ESG reporting, supply chain engagement, and sustainable finance tools, enabling organizations to comply with global and local standards, improve transparency, and support initiatives like the Asia-Pacific Single Accesspoint for ESG Data (SAFE) and the ESCAP Sustainable Business Network (ESBN) Asia-Pacific Green Deal.</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <div className="w-[800px] mb-[25px] lg:flex justify-between">
+                                            <div className="w-[300px] h-[235px] p-[25px] rounded-[32px] bg-[#F4F4F4] p-[16px]">
+                                                <div className="w-[100%] h-[100%] bg-white rounded-[28px] flex justify-center items-center">
+                                                    <img src={"/images/esgpedia-logo.png"} />
+                                                </div>
+                                            </div>
+                                            <div className="w-[470px] h-[235px]">
+                                                <img src={"/images/esgpedia-cover.jpg"} className="w-[470px] h-[235px] rounded-[24px]" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            />
+                            <ContentDivider />
+                            <HideableComponent title="How does ESG calculator work?"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>ESGpedia’s ESG Calculator is a built-in, standards-aligned tool that helps businesses and SMEs quantify their greenhouse gas (GHG) emissions and related sustainability metrics by converting operational and supply chain data into Scope 1, 2, and 3 emissions in accordance with the GHG Protocol and ISO 14064 methodologies. </ContentParagraph>
+                                        <ContentParagraph>The calculator uses an extensive database of localised emission factors and detailed input categories (such as fuel use, electricity consumption, travel, materials, and value-chain activities) to generate credible, automated carbon footprint results that can be tracked, analysed, and reported within the broader ESGpedia platform for compliance with international and local reporting requirements. </ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <img src={'/images/old-vs-new-ui.png'} width={"980px"} height={"850px"} />
+                                    </div>
+                                }
+                            />
+                            <ContentDivider />
+                            <ContentContainer>
+                                <div className="flex gap-4 items-center">
+                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                    <Title text="Overview - Conclusion" />
                                 </div>
-                            }
-                        />
-                        <ContentDivider />
-                        <HideableComponent title="How does ESG calculator work?"
-                            children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>ESGpedia’s ESG Calculator is a built-in, standards-aligned tool that helps businesses and SMEs quantify their greenhouse gas (GHG) emissions and related sustainability metrics by converting operational and supply chain data into Scope 1, 2, and 3 emissions in accordance with the GHG Protocol and ISO 14064 methodologies. </ContentParagraph>
-                                    <ContentParagraph>The calculator uses an extensive database of localised emission factors and detailed input categories (such as fuel use, electricity consumption, travel, materials, and value-chain activities) to generate credible, automated carbon footprint results that can be tracked, analysed, and reported within the broader ESGpedia platform for compliance with international and local reporting requirements. </ContentParagraph>
-                                </div>
-                            }
-                            fullWidhtChildren={
-                                <div className="mt-[-15px] float-right">
-                                    <img src={'/images/old-vs-new-ui.png'} width={"980px"} height={"850px"} />
-                                </div>
-                            }
-                        />
-                        <ContentDivider />
-                        <ContentContainer>
-                            <div className="flex gap-4 items-center">
-                                <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                <Title text="Overview - Conclusion" />
-                            </div>
 
-                            <ContentParagraph>This case study documents the full revamp of ESGpedia’s ESG Calculator, focused on improving accuracy, usability, and business outcomes.</ContentParagraph>
-                            <ContentParagraph>Through this project, I introduced a Human-Centered Design (HCD) process to the company, establishing a habit of user interviews and usability testing rather than relying on assumptions. This approach ensured that time and resources were invested in solving the right problems and delivering meaningful, measurable results when the product was launched. Read on to explore my approach, the key decisions I made, and the outcomes achieved by the end of the project.</ContentParagraph>
-                        </ContentContainer>
+                                <ContentParagraph>This case study documents the full revamp of ESGpedia’s ESG Calculator, focused on improving accuracy, usability, and business outcomes.</ContentParagraph>
+                                <ContentParagraph>Through this project, I introduced a Human-Centered Design (HCD) process to the company, establishing a habit of user interviews and usability testing rather than relying on assumptions. This approach ensured that time and resources were invested in solving the right problems and delivering meaningful, measurable results when the product was launched. Read on to explore my approach, the key decisions I made, and the outcomes achieved by the end of the project.</ContentParagraph>
+                            </ContentContainer>
+                        </div>
                         <ContentContainer py={"0px"} isFull={true}>
                             <ContentDivider isFull={true} />
                         </ContentContainer>
-                        <ContentContainer>
-                            <Title text="Researches" />
-                            <ContentParagraph>With the context established, let’s move into researches. This section tells the story of how we listened to users and observed real behaviors through qualitative interviews, surveys, usability testing, diary studies, and Microsoft Clarity. Together, these methods helped uncover <span className="text-black">the frustrations, doubts, and hidden behaviors behind the numbers.</span></ContentParagraph>
-                        </ContentContainer>
-                        <ContentDivider />
-                        <HideableComponent title="Qualitative and Quantitative Research" children={
-                            <div className="pt-[40px]">
-                                <ContentParagraph>First what i did is prepare an interview question set for our current customers and structure how product team would consolidate the interview session for ESG Calculator. Also, a set of survey questions to follow up.  </ContentParagraph>
-                                <ContentParagraph>Furthermore, I communicate closely with the sale team to tag along at their meeting of potential customers and observe the business nature. And whenever I got a chance, I politely ask for customer time and have them answer my survey questions. </ContentParagraph>
-                            </div>
-                        }
-                            fullWidhtChildren={
-                                <div className="mt-[-15px] float-right">
-                                    <QualityQuestionSetsComponent />
-                                    <QuantityQuestionSetsComponent />
-                                </div>
-                            } />
+                    </ContentSectionWrapper>
 
-                        <ContentDivider />
-                        <HideableComponent title="Usability testing" children={
-                            <div className="pt-[40px]">
-                                <ContentParagraph>After preparing the Qualitative and Quantitative question sets, we now have to learn the real pain points of our calculator by doing the usability testing.</ContentParagraph>
-                                <ContentParagraph>Usability testing helps us observe how users actually interact with the ESG calculator — revealing hidden friction, confusion, or workflow issues that users might not articulate verbally.</ContentParagraph>
-                                <ContentParagraph>Since the feature was already available in our live app, we conducted the usability test using the real product. Below is a sample of our initial (pre-revamp) version, only for case study viewers to have a glimpse. </ContentParagraph>
-                            </div>
-                        }
-                            fullWidhtChildren={
-                                <div className="mt-[-15px] float-right">
-                                    <div className="w-[980px] h-[700px] bg-[#F4F4F4] p-[65px]">
-                                        <div className="w-[100%] h-[100%] border-[15px] rounded-[24px] border-black overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                                            <img src={"/images/usability-website.png"} width={"100%"} />
+
+
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[2] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Researches" />
+                                <ContentParagraph>With the context established, let’s move into researches. This section tells the story of how we listened to users and observed real behaviors through qualitative interviews, surveys, usability testing, diary studies, and Microsoft Clarity. Together, these methods helped uncover <span className="text-black">the frustrations, doubts, and hidden behaviors behind the numbers.</span></ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+                            <HideableComponent title="Qualitative and Quantitative Research" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>First what i did is prepare an interview question set for our current customers and structure how product team would consolidate the interview session for ESG Calculator. Also, a set of survey questions to follow up.  </ContentParagraph>
+                                    <ContentParagraph>Furthermore, I communicate closely with the sale team to tag along at their meeting of potential customers and observe the business nature. And whenever I got a chance, I politely ask for customer time and have them answer my survey questions. </ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <QualityQuestionSetsComponent />
+                                        <QuantityQuestionSetsComponent />
+                                    </div>
+                                } />
+
+                            <ContentDivider />
+                            <HideableComponent title="Usability testing" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>After preparing the Qualitative and Quantitative question sets, we now have to learn the real pain points of our calculator by doing the usability testing.</ContentParagraph>
+                                    <ContentParagraph>Usability testing helps us observe how users actually interact with the ESG calculator — revealing hidden friction, confusion, or workflow issues that users might not articulate verbally.</ContentParagraph>
+                                    <ContentParagraph>Since the feature was already available in our live app, we conducted the usability test using the real product. Below is a sample of our initial (pre-revamp) version, only for case study viewers to have a glimpse. </ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px]">
+                                        <div className="float-right">
+                                            <div className="w-[980px] h-[700px] bg-[#F4F4F4] p-[65px] rounded-[24px]">
+                                                <div className="w-[100%] h-[100%] border-[15px] rounded-[24px] border-black overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                                    <img src={"/images/usability-website.png"} width={"100%"} />
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <ContentContainer py="80px">
-                                        <ContentParagraph><ContentParagraph>Below is the testing plan, we used along side the live usabilitiy testing session. Participants will perform key tasks using the real product to identify any usability issues, workflow friction, or unclear interfaces. </ContentParagraph></ContentParagraph>
-                                    </ContentContainer>
-                                    <div className="float-right">
-                                        <UsabilityTestingPlanComponent />
-                                    </div>
 
+                                        <ContentContainer py="80px">
+                                            <ContentParagraph><ContentParagraph>Below is the testing plan, we used along side the live usabilitiy testing session. Participants will perform key tasks using the real product to identify any usability issues, workflow friction, or unclear interfaces. </ContentParagraph></ContentParagraph>
+                                        </ContentContainer>
+                                        <div className="float-right">
+                                            <UsabilityTestingPlanComponent />
+                                        </div>
+
+                                    </div>
+                                } />
+
+                            <ContentDivider />
+                            <HideableComponent title="Diary Studies" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Since diary studies require consistent follow-ups, we anticipated that our clients—who already face the complex process of calculating ESG metrics—might find them intrusive or time-consuming.</ContentParagraph>
+                                    <ContentParagraph>To balance this, we decided to conduct the diary study internally by involving team members from different departments. This approach allows us to simulate real user scenarios, gather authentic insights, and test the process flow—without placing extra burden on our customers.</ContentParagraph>
                                 </div>
-                            } />
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right">
+                                        <StudyPlanComponent />
+                                    </div>
 
-                    </div>
+                                } />
+
+                            <ContentDivider />
+                            <HideableComponent title="Microsoft Clarity as Validation layer" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>And lastly, to validate the usability findings from our qualitative studies, we used Microsoft Clarity to observe real user behavior within the live ESG Calculator. We mainly used Microsoft Clarity as a validation layer — to support and cross-check the insights gathered from our earlier research.</ContentParagraph>
+                                    <ContentParagraph>Our goal was to identify engagement trends, task duration, and potential drop-off points throughout the calculator flow. These insights helped confirm whether the usability issues reported by users were also reflected in their actual behavior on the platform.</ContentParagraph>
+                                    <p className="p-[10px] text-[16px] font-normal">
+                                        ''  By bridging what users said with what they actually did, we confirmed the
+                                        core usability pain points and ensured our next design decisions were
+                                        grounded in real user behavior ''
+                                    </p>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <img src={"/images/microsoft-clarity.png"} width={"800px"} />
+                                    </div>
+
+                                } />
+
+                            <ContentDivider />
+
+                            <ContentContainer isFull={true}>
+                                <ContentContainer py="0px">
+                                    <div className="flex gap-4 items-center">
+                                        <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                        <Title text="Conclusion of Research Findings" />
+                                    </div>
+
+                                    <ContentParagraph>To comprehensively assess the usability and effectiveness of the ESG Calculator, we triangulated user feedback, behavioral analytics, and real task performance across multiple research methods.</ContentParagraph>
+                                    <ContentParagraph>Our evaluation focused on two key dimensions — Usability Metrics, which measure how smoothly users interact with the tool, and Effectiveness Metrics, which reflect how well the product delivers value and drives impact for both users and the business.</ContentParagraph>
+                                </ContentContainer>
+                                <div className="mt-[15px] float-right">
+                                    <img src={"/images/usability-metrics.png"} width={"800px"} />
+                                </div>
+                                <ContentContainer py="60px">
+                                    <ContentParagraph>The 71% task completion shows it delivers core functionality, and users can eventually succeed (with help), which is a solid foundation for an ESG tool targeting non-experts like small suppliers.</ContentParagraph>
+                                    <ContentParagraph>Low SUS (59), high assistance (68%) and frustration (above 64%), plus 58%
+                                        drop-offs, indicate it's frustrating and inefficient. This could lead to low user engagement, higher support costs, increased errors (29%), and poor word-of-mouth among SMEs. At 36 minutes average time, it's not scalable for busy users.</ContentParagraph>
+                                </ContentContainer>
+                                <div className="mt-[15px] float-right">
+                                    <img src={"/images/impact-metrics.png"} width={"800px"} />
+                                </div>
+                                <ContentContainer py="60px">
+                                    <ContentParagraph>The business impact metrics reveal a tool with clear potential but critical trust and retention hurdles: only 58% of users trust the final output due to opaque formulas and input gaps, while 33% abandon the process—mostly at the complex Pillar 2 calculations.</ContentParagraph>
+                                    <ContentParagraph>Framework clarity stands at just 42%, with existing tooltips and examples failing to help, dragging average satisfaction to 55% amid perceptions of complexity and time burden. Yet, a strong 68% of users express intent to return if efficiency, automation, and clarity are meaningfully improved—signaling that while the feature currently undermines confidence and completion, targeted fixes could unlock high reuse and long-term business value.</ContentParagraph>
+                                </ContentContainer>
+                            </ContentContainer>
+                        </div>
+                    </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[3] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Problem Define" />
+                                <ContentParagraph>After gathering insights, we synthesized what we learned. This section shows how scattered findings were transformed into clear problem statements using user personas, stories, affinity mapping, empathy maps, and customer journey mapping. It highlights the key usability, trust, and retention challenges that mattered most to both users and the business.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+                        </div>
+                    </ContentSectionWrapper>
 
                 </div>
-            </div>
+            </div >
             <div className="pt-[200px]"></div>
-        </div>
+        </div >
     )
 }
 
@@ -269,7 +475,7 @@ const QualityQuestionSetsComponent = () => {
     return (
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                <div>
+                <div className="w-[30%]">
                     <img src={"/images/quality-research.png"} height={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
@@ -291,12 +497,12 @@ const QualityQuestionSetsComponent = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 font-medium">
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
                                 <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Qualitative Question Set</p>
                             </ModalHeader>
-                            <ModalBody>
+                            <ModalBody className="p-[0px]">
                                 <div className="bg-[#F4F4F4] p-[30px]">
-                                    <div className="flex justify-between h-[450px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                    <div className="flex justify-between h-[650px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                                         <div className="w-[48%] h-fit bg-white rounded-[24px] py-[30px] px-[20px]">
                                             <div className="flex justify-between items-center">
                                                 <p className={`text-[${FontSizes.small}] text-[${Colors.title}] font-thin`}>Interview For <span className="text-[#FF5B5B]">Existing Users</span></p>
@@ -402,9 +608,6 @@ const QualityQuestionSetsComponent = () => {
                                     </div>
                                 </div>
                             </ModalBody>
-                            <ModalFooter>
-
-                            </ModalFooter>
                         </>
                     )}
                 </ModalContent>
@@ -420,7 +623,7 @@ const QuantityQuestionSetsComponent = () => {
     return (
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                <div>
+                <div className="w-[30%]">
                     <img src={"/images/quantity-research.png"} height={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
@@ -442,25 +645,23 @@ const QuantityQuestionSetsComponent = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 font-medium">
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
                                 <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Quantitative Question Set</p>
                             </ModalHeader>
-                            <ModalBody>
-                                <div className="bg-[#F4F4F4] p-[30px]">
-                                    <div className="h-[450px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                                        <div className="w-[100%] h-[435px] bg-white p-[30px] rounded-[24px] flex justify-center">
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4] px-[30px]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        {/* <div className="w-[100%] h-[435px] bg-white p-[30px] rounded-[24px] flex justify-center">
                                             <img src={"/images/quantity-1.png"} />
                                         </div>
                                         <div className="h-[30px]"></div>
                                         <div className="w-[100%] h-[435px] bg-white p-[30px] rounded-[24px] flex justify-center">
                                             <img src={"/images/quantity-3.png"} />
-                                        </div>
+                                        </div> */}
+                                        <img src={"/images/quantative.png"} width={"100%"} />
                                     </div>
                                 </div>
                             </ModalBody>
-                            <ModalFooter>
-
-                            </ModalFooter>
                         </>
                     )}
                 </ModalContent>
@@ -476,7 +677,7 @@ const UsabilityTestingPlanComponent = () => {
     return (
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                <div>
+                <div className="w-[30%]">
                     <img src={"/images/usability-testing.png"} height={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
@@ -499,12 +700,12 @@ const UsabilityTestingPlanComponent = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 font-medium">
-                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Quantitative Question Set</p>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Usability Testing Plan</p>
                             </ModalHeader>
-                            <ModalBody>
-                                <div className="bg-[#F4F4F4] p-[20px]">
-                                    <div className="h-[450px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                                         <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
                                             <ContentDivider isFull={true} />
                                             <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
@@ -575,9 +776,6 @@ const UsabilityTestingPlanComponent = () => {
                                     </div>
                                 </div>
                             </ModalBody>
-                            <ModalFooter>
-
-                            </ModalFooter>
                         </>
                     )}
                 </ModalContent>
@@ -586,6 +784,117 @@ const UsabilityTestingPlanComponent = () => {
         </>
 
     )
+}
+
+const StudyPlanComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/study-plan.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Study Plan</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the detailed empathy map
+                            and understand users’ thoughts, behaviors, and
+                            emotions throughout the journey.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Diary Study Plan</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        {/* <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Objectives
+                                            </h2>
+                                            <ContentList>Understand how user perception, confidence, and frustration levels change
+                                                over time.</ContentList>
+                                            <ContentList>Validate whether the current calculator supports users in completing
+                                                end-to-end ESG reporting tasks efficiently.</ContentList>
+                                            <ContentList>Prepare the groundwork for a future client-facing diary study after product
+                                                refinements.</ContentList>
+                                        </div>
+
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium pb-[20px]`}>
+                                                Duration & Format
+                                            </h2>
+                                            <ContentList>Duration: 7 - 10 days </ContentList>
+                                            <ContentList>Participants: 6–8 internal staff members (from various departments).</ContentList>
+                                            <ContentList>Platform: Shared Notion link with structured questions and optional screenshots.</ContentList>
+                                        </div>
+
+                                        <div className="h-[30px]"></div>
+                                        <div className="w-[100%] bg-white p-[30px] rounded-[24px]">
+                                            <div className="flex justify-between pb-[10px] items-center">
+                                                <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] font-medium`}>
+                                                    Schedule & Prompts
+                                                </h2>
+                                                <div className="bg-[#F4F4F4] p-[10px] flex items-center gap-3">
+                                                    <img src={"/images/time.png"} width={"12px"} height={"12px"} />
+                                                    <p className="text-[10px]">Estimated: 30 mins/day</p>
+                                                </div>
+                                            </div>
+                                            <ContentDivider isFull={true} />
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium py-[20px]`}>
+                                                Day 1 - Onboarding and Renewable Energy
+                                            </h2>
+                                            <ContentList>Which part of the interface was confusing or unclear?</ContentList>
+                                            <ContentList>What do you expect to happen after entering your company details?</ContentList>
+                                            <ContentList>What type of data did you input today (e.g., Renewable, Certificates)?</ContentList>
+
+                                            <h2 className={`text-[${FontSizes.small}] text-[${Colors.title}] font-medium py-[20px]`}>
+                                                Day 2 - Scope 1, 2 and Emission Intensity
+                                            </h2>
+                                            <ContentList>Which part of the interface was confusing or unclear?</ContentList>
+                                            <ContentList>What do you expect to happen after entering your company details?</ContentList>
+                                            <ContentList>What type of data did you input today (e.g., Renewable, Certificates)?</ContentList>
+                                        </div> */}
+                                        <img src={"/images/diary-study-plan.png"} width={"100%"} />
+
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+type ContentSectionWrapperProps = {
+    children: React.ReactNode
+}
+const ContentSectionWrapper: FC<ContentSectionWrapperProps> = ({ children }) => {
+    return (
+        <div className="w-[80%] ml-[20%] flow-root">
+            {children}
+        </div>
+    )
+
 }
 
 type TagProps = {
@@ -614,7 +923,7 @@ type ImporvementPorps = {
 const Improvement: FC<ImporvementPorps> = ({ title, icon, improvedNumber, improvedUnit, improvedFrom, improvedPercent }) => {
     return (
         <div className=" bg-[#F4F4F4] rounded-[12px] py-[28px] px-[30px]">
-            <div className="flex gap-4 justify-center items-center">
+            <div className="flex gap-4 justify-start items-center">
                 <img src={icon} width={'20px'} height={'18px'} />
                 <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>{title}</p>
             </div>
@@ -712,21 +1021,22 @@ const ContentList: FC<ContentListProps> = ({ children, fontSize }) => {
 
 type ContentContainerProps = {
     children: React.ReactNode,
+    id?: string,
     py?: string,
     isFull?: boolean
 }
 
-const ContentContainer: FC<ContentContainerProps> = ({ children, isFull, py }) => {
+const ContentContainer: FC<ContentContainerProps> = ({ children, id, isFull, py }) => {
     return (
         <>
             {isFull ?
-                <div className="float-right flow-root w-[100%]">
-                    <div className={`w-[100%]`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }}>
+                <div id={id} className="float-right w-[100%]">
+                    <div className={`w-[100%] flow-root`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }}>
                         {children}
                     </div>
                 </div>
                 :
-                <div className="float-right">
+                <div id={id} className="float-right">
                     <div className={`w-[700px]`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }} >
                         {children}
                     </div>

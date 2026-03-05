@@ -8,13 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/styled": "^11.14.1",
     "@heroui/modal": "^2.2.28",
     "@heroui/react": "^2.8.9",
     "@nextui-org/modal": "^2.2.7",
     "framer-motion": "^12.34.3",
+    "lodash": "^4.17.23",
     "next": "15.5.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-intersection-observer": "^10.0.3",
     "react-modal": "^3.16.3",
     "react-slick": "^0.31.0",
     "slick-carousel": "^1.8.1",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/lodash": "^4.17.24",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
