@@ -3,7 +3,7 @@
 import Divider from "@/app/components/divider"
 import { Colors, FontSizes } from "@/app/constants/constants"
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/modal"
-import React, { FC, useEffect, useMemo, useRef, useState } from "react"
+import React, { FC, MouseEvent, useEffect, useMemo, useRef, useState } from "react"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
@@ -449,6 +449,9 @@ export default function EsgCalculator() {
                                     <ContentParagraph>Framework clarity stands at just 42%, with existing tooltips and examples failing to help, dragging average satisfaction to 55% amid perceptions of complexity and time burden. Yet, a strong 68% of users express intent to return if efficiency, automation, and clarity are meaningfully improved—signaling that while the feature currently undermines confidence and completion, targeted fixes could unlock high reuse and long-term business value.</ContentParagraph>
                                 </ContentContainer>
                             </ContentContainer>
+                            <ContentContainer py={"0px"} isFull={true}>
+                                <ContentDivider isFull={true} />
+                            </ContentContainer>
                         </div>
                     </ContentSectionWrapper>
 
@@ -459,9 +462,179 @@ export default function EsgCalculator() {
                                 <ContentParagraph>After gathering insights, we synthesized what we learned. This section shows how scattered findings were transformed into clear problem statements using user personas, stories, affinity mapping, empathy maps, and customer journey mapping. It highlights the key usability, trust, and retention challenges that mattered most to both users and the business.</ContentParagraph>
                             </ContentContainer>
                             <ContentDivider />
+                            <HideableComponent title="User Story"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>Managing ESG data is complex—even for small companies. Tracking electricity, water, waste, and emissions within a single organization is already challenging. That complexity multiplies for large companies that rely on hundreds of suppliers.</ContentParagraph>
+                                        <div>
+                                            <img src={"/images/user-story-relation.png"} />
+                                        </div>
+                                        <ContentParagraph>Many local suppliers and SMEs are unfamiliar with ESG reporting altogether and often track data in inconsistent ways—across spreadsheets, different formats, or even paper records. As a result, collecting and verifying data becomes slow and error-prone, with progress stalled by endless email follow-ups and manual clarification.</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <img src={'/images/user-story-explain.png'} />
+                                    </div>
+                                }
+                            />
+
+                            <ContentDivider />
+                            <HideableComponent title="User Persona"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>We didn't guess who our users were—we already knew two of them.</ContentParagraph>
+                                        <ContentParagraph>ShengSiong and Razer both are our real customers and we met with their sustainability manager occasionally. We thought using them as our persona will greatly enhance our understanding of them and help validate their problems.</ContentParagraph>
+
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <PersonaOneComponent />
+                                        <PersonaTwoComponent />
+                                        <ContentContainer py="60px">
+                                            <ContentParagraph>These personas helped us design with empathy and clarity. Instead of assuming all companies use ESG tools the same way, we could tailor our decisions to real needs — whether that meant simplifying the data input journey for beginners or optimizing framework mapping for advanced users. This approach ensured our redesign was grounded in real-world challenges, not just assumptions.</ContentParagraph>
+                                        </ContentContainer>
+
+                                    </div>
+                                }
+                            />
+
+                            <ContentDivider />
+                            <HideableComponent title="Affinity Mapping"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>After gathering a lot of research data and behavioral insights, we needed a structured way to make sense of it all. Affinity mapping was the perfect starting point for synthesis.</ContentParagraph>
+                                        <ContentParagraph>In the first step, we placed every data point, quote, behavior, and metric as individual sticky notes without judging or filtering them.</ContentParagraph>
+                                        <ContentParagraph>Color code by research method:</ContentParagraph>
+                                        <ContentParagraph>🟪 Qualitative | 🟥 Survey | 🟦 Usability | 🟨 Diary | 🟩 Clarity</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px]">
+                                        <div className="float-right">
+                                            <AffinityMapOneComponent />
+                                        </div>
+
+                                        <ContentContainer py="60px">
+                                            <ContentParagraph>Then as a Step 2, we categorize the data by identifying patterns and similarities through iterative sorting, grouping related notes, across our diverse users, from beginner SMEs to advanced enterprises like Sheng Siong and Razer.</ContentParagraph>
+                                            <ContentParagraph>The six main categories were emerged.</ContentParagraph>
+                                            <div className="py-[20px]">
+                                                <p>"</p>
+                                                <div className="pl-[10px]">
+                                                    <p className="leading-9">
+                                                        a. Data accuracy, format and input frictions. <br />
+                                                        b. Barriers Related to Terminology and Trust <br />
+                                                        c. UI Challenges: Visual Hierarchy and Information Overload <br />
+                                                        d. UX Challenges: Learning Curve, Onboarding Gaps, and Time Efficiency  <br />
+                                                        e. Guidance, Help Resources, or Integrated Assistance <br />
+                                                        f.  Suggestions for New Features or Direct User Requests &nbsp; &nbsp; "
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <ContentParagraph>Once clear themes emerged, we moved into Step 3 — conducting a dot-voting exercise with the team to identify which clusters represented the most critical user problems. This allowed us to prioritize the issues with the highest impact and frequency, ensuring that our efforts focused on what truly mattered to both users and the business.</ContentParagraph>
+                                        </ContentContainer>
+
+                                        <div className="mt-[-15px] float-right">
+                                            <AffinityMapTwoComponent />
+                                        </div>
+
+                                    </div>
+                                }
+                            />
+
+                            <ContentDivider />
+                            <HideableComponent title="Empathy Map"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>Empathy mapping is a pivotal tool in human-centered design, particularly for complex domains like ESG reporting, where users range from novice SMEs to seasoned enterprises. This tool bridged raw data from affinity clusters (e.g., data friction, framework confusion) to a deeper understanding of what user struggles. </ContentParagraph>
+                                        <ContentParagraph>To populate the empathy map quadrants, we drew directly from triangulated research data, starting with affinity-mapped notes which are already categorized. </ContentParagraph>
+                                        <div className="flex gap-3 items-start pt-[10px]">
+                                            <img src={"/images/ear.png"} width={"20px"} height={"25px"} />
+                                            <ContentParagraph>
+                                                <span className="text-black">What user "Hears"</span> - captured external influences like stakeholder demands for reliable data (e.g., only 27.3% gathered on time) and feedback on framework mismatches.
+                                            </ContentParagraph>
+                                        </div>
+                                        <div className="flex gap-3 items-start pt-[10px]">
+                                            <img src={"/images/eye.png"} width={"20px"} height={"25px"} />
+                                            <ContentParagraph>
+                                                <span className="text-black">What user "Sees"</span> - focused on observed behaviors via Clarity heatmaps and session recordings, such as rage clicks on help icons (64% frustration during uploads) and low scroll depth (58% drop-offs in Scope 2).
+                                            </ContentParagraph>
+                                        </div>
+                                        <div className="flex gap-3 items-start pt-[10px]">
+                                            <img src={"/images/brain.png"} width={"20px"} height={"25px"} />
+                                            <ContentParagraph>
+                                                <span className="text-black">What user "Thinks & Feels"</span> - delved into internal states, inferring anxiety from low confidence scores (58%) and overwhelm from diary entries about supplier verification.
+                                            </ContentParagraph>
+                                        </div>
+                                        <div className="flex gap-3 items-start pt-[10px]">
+                                            <img src={"/images/touch.png"} width={"20px"} height={"25px"} />
+                                            <ContentParagraph>
+                                                <span className="text-black">What user "Says & Does"</span> - compiled verbatim quotes and actions from interviews/usability tests, like "I need examples for Scope 3" or backtracking during inputs (29% error rate).
+                                            </ContentParagraph>
+                                        </div>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <div className="float-right">
+                                            <EmpathyMapComponent />
+                                        </div>
+
+                                        <ContentContainer py="60px">
+                                            <ContentParagraph>Once the empathy map was complete, we synthesized recurring patterns across all quadrants to identify: Pains and Gains.</ContentParagraph>
+                                            <div className="flex gap-3 items-start pt-[10px]">
+                                                <img src={"/images/pains.png"} width={"20px"} height={"25px"} />
+                                                <ContentParagraph>
+                                                    <span className="text-black">Pains</span> - distilled frustrations (e.g., learning curves, 33% abandonment) and drove simplifications (tooltips, auto-conversions cutting errors, etc).
+                                                </ContentParagraph>
+                                            </div>
+                                            <div className="flex gap-3 items-start pt-[10px]">
+                                                <img src={"/images/gains.png"} width={"20px"} height={"25px"} />
+                                                <ContentParagraph>
+                                                    <span className="text-black">Gains</span> - inspired features (bulk imports, progress trackers), reducing drop-offs, boosting trust, and enabling scalable ESG compliance for stakeholders.
+                                                </ContentParagraph>
+                                            </div>
+                                        </ContentContainer>
+                                        <div className="float-right">
+                                            <PainGainComponent />
+                                        </div>
+                                    </div>
+                                }
+                            />
+
+                            <ContentDivider />
+                            <HideableComponent title="Customer Journey"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>Customer journey mapping allowed us to deeply understand how sustainability managers and SMEs navigate the our Calculator. ESG workflows are inherently fragmented and data-heavy, visualizing the entire journey helped us see not just what users do, but where emotions shift, where confusion builds, and where friction accumulates across different touchpoints. </ContentParagraph>
+                                        <ContentParagraph>The journey map became the bridge between raw research and actionable design decisions, giving us a holistic view of users’ real challenges across phases of the ESG reporting cycle.</ContentParagraph>
+
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="mt-[-15px] float-right">
+                                        <JourneyMapComponent />
+
+                                    </div>
+                                }
+                            />
+                            <ContentDivider />
+                            <ContentContainer py="60px">
+                                <div className="flex gap-4 items-center">
+                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                    <Title text="Conclusion of Problem Define or HMWs" />
+                                </div>
+
+                                <ContentParagraph>After all methods of above, we can say now that we know our customer along with their pain points throughout the whole journey. Before turning those pain points into business opportunities, we need to loudly address the brutal honest weak points or problems our current application is having. </ContentParagraph>
+                                <ContentParagraph>This is where HMW method is used. We translated key pain points and opportunities identified in the customer journey into focused “How Might We” questions to guide solution ideation.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentContainer py={"0px"} isFull={true}>
+                                <ContentDivider isFull={true} />
+                            </ContentContainer>
                         </div>
                     </ContentSectionWrapper>
-
                 </div>
             </div >
             <div className="pt-[200px]"></div>
@@ -885,6 +1058,388 @@ const StudyPlanComponent = () => {
     )
 }
 
+const PersonaOneComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/shengsion-persona.png"} width={"170px"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Persona 1 - ShengSiong</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the ShengSiong persona and
+                            its ESG challenges.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Persona 1 - ShengSion</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/persona-one.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const PersonaTwoComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/razer-persona.png"} width={"170px"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Persona 2 - Razer</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the Razer persona and
+                            its ESG challenges.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Persona 2 - Razer</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/persona-two.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const AffinityMapOneComponent = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/affinity-one-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Affinity Map - Step 1</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the detailed empathy map
+                            and understand users’ thoughts, behaviors, and
+                            emotions throughout the journey.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Affinity Map - Step 1</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/affinity-one.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const AffinityMapTwoComponent = () => {
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/affinity-one-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Affinity Map - Step 2</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the detailed empathy map
+                            and understand users’ thoughts, behaviors, and
+                            emotions throughout the journey.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Affinity Map - Step 2</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/affinity-two.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const EmpathyMapComponent = () => {
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/empathy-map-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Empathy Map</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the detailed empathy map
+                            and understand users’ thoughts, behaviors, and
+                            emotions throughout the journey.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Empathy Map</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/empathy-map.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const PainGainComponent = () => {
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/pain-gain-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Pains and Gains</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the key pains and gains
+                            uncovered from the empathy mapping.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Pains and Gains</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div className="h-[650px] p-[32px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img src={"/images/pain-gain.png"} width={"100%"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+
+const JourneyMapComponent = () => {
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+    const [isDown, setIsDown] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
+
+    const onMouseDown = (e: MouseEvent) => {
+        e.preventDefault()
+        const slider: HTMLDivElement | null = scrollRef.current;
+        if (slider) {
+            setIsDown(true);
+            setStartX(e.pageX - slider.offsetLeft);
+            setStartY(e.pageY - slider.offsetTop);
+            setScrollLeft(slider.scrollLeft);
+            setScrollTop(slider.scrollTop);
+        }
+
+    };
+
+    const onMouseLeave = () => {
+        setIsDown(false);
+    };
+
+    const onMouseUp = () => {
+        setIsDown(false);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const slider = scrollRef.current;
+        if (slider) {
+            const x = e.pageX - slider.offsetLeft;
+            const y = e.pageY - slider.offsetTop;
+
+            // Drag speed multiplier (optional, 1 is default)
+            const walkX = (x - startX);
+            const walkY = (y - startY);
+
+            slider.scrollLeft = scrollLeft - walkX;
+            slider.scrollTop = scrollTop - walkY;
+        }
+
+    };
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/affinity-one-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Joureny Mapping</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore the full customer journey
+                            map in detail.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Journey Map</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div ref={scrollRef} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onMouseMove={onMouseMove} className="h-[650px] p-[32px] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img className="max-w-none" src={"/images/journey-map.png"} width={"2100px"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+
 type ContentSectionWrapperProps = {
     children: React.ReactNode
 }
@@ -903,7 +1458,7 @@ type TagProps = {
 
 const Tag: FC<TagProps> = ({ title }) => {
     return (
-        <div className="w-[140px] h-[30px] bg-[#F4F4F4] flex items-center justify-center rounded tracking-wider">
+        <div className="px-[15px] py-[5px] bg-[#F4F4F4] flex items-center justify-center rounded tracking-wider">
             <p className="text-[16px] text-[#777777]">
                 {title}
             </p>
