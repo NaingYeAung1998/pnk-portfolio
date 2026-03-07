@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
 import SliderWrapper from "./slider.style";
 import { throttle } from 'lodash';
+import styles from '../styles.module.css'
 
 
 const achieveSliderSetting: Settings = {
@@ -22,6 +23,14 @@ const achieveSliderSetting: Settings = {
             <div className="loading" />
         </div>
     )
+}
+
+const sliderFrameSetting: Settings = {
+    dots: false,
+    arrows: false,
+    infinite: false,
+    autoplay: false,
+    centerPadding: "20px"
 }
 
 const navigations = [
@@ -68,14 +77,22 @@ export default function EsgCalculator() {
     const navRefs = useRef(new Array(navigations.length));
 
     const checkVisibility = () => {
+        const viewPort = {
+            height: window.innerHeight,
+            width: window.innerWidth,
+        };
         navigations.forEach((nav, index) => {
             const section = navRefs.current[index];
             if (!section) return;
 
             const rect = section.getBoundingClientRect();
 
-            const isVisible = (rect.top + rect.height / 2) > 0 && rect.top < window.innerHeight / 2;
-
+            const isVisible = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= viewPort.height &&
+                rect.right <= viewPort.width
+            );
             if (isVisible) {
                 setCurrentNavigation(nav.id);
             } else {
@@ -163,12 +180,12 @@ export default function EsgCalculator() {
                 <div id="customerExperienceSection" className="pt-[120px] pb-[120px]">
                     <h2 className={`text-[${FontSizes.medium}]`}>HOW OUR CUSTOMERS EXPERIENCE THE SOLUTION -</h2>
                     <div className="pt-[40px] lg:flex justify-between">
-                        <CustomerExperienceVideo link="https://www.youtube.com/embed/_QDthx_WjwE?si=Z8ZadHlV6saW_bVB" icon="/images/razor.png" title="Razer Inc."
+                        <CustomerExperienceVideo link="https://www.youtube.com/embed/uxcfLEHojvM?si=otmTcJiKpzG2-A8N" icon="/images/razor.png" title="Razer Inc."
                             content="“...helping us understand the questionnaire and
                                     also helped to make the whole user 
                                     experience more palatable...”"
                             customer="Kenneth Ng, Global Sustainability Lead" />
-                        <CustomerExperienceVideo link="https://www.youtube.com/embed/g6UxU677DiE?si=AwONnUvlBZ4DE1DI" icon="/images/dp.png" title="Durapower Group"
+                        <CustomerExperienceVideo link="https://www.youtube.com/embed/eXsZdLYeK4s?si=6Zqv2fAVm9AuRE0c" icon="/images/dp.png" title="Durapower Group"
                             content="“...Calculator improves the accuracy and credibility
                                     of emissions tracking across our value chain,as
                                     it is built in alignment with GHG protocol...”"
@@ -179,8 +196,13 @@ export default function EsgCalculator() {
                 <div className="pt-[120px]">
                     <div className="w-[20%] sticky top-[50px] left-20">
                         {
-                            navigations.map((nav) =>
-                                <Navigation key={nav.id} text={nav.title} isActive={nav.id == currentNavigation} />
+                            navigations.map((nav, index) =>
+                                <Navigation key={nav.id} text={nav.title} isActive={nav.id == currentNavigation} handleClick={() => {
+                                    navRefs.current[index].scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "start"
+                                    });
+                                }} />
                             )
                         }
                     </div>
@@ -635,9 +657,555 @@ export default function EsgCalculator() {
                             </ContentContainer>
                         </div>
                     </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[4] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Ideation" />
+                                <ContentParagraph>Once the problems were clearly defined, we shifted into exploration. This section walks through how we reframed challenges into opportunities using How Might We (HMW) statements, prioritized ideas, and explored multiple solution directions before converging on the most impactful concepts.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+
+                            <HideableComponent title="Prioritising the Problems" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>According to previous sections, we have 25 problems to solve to achieve our business goals. We need to align with our stakeholders to fully understand that our solutions are feasible and how much time and effort needed to tackle this improvements effectively. So that, our teams could build the right features at right time and avoid feature creep.</ContentParagraph>
+                                    <ContentParagraph>So, I initially thought there were many methods to prioritize the features but later I found out that MOSCOW Method was the most relevant method for us.</ContentParagraph>
+                                    <div className="flex gap-3 items-start pt-[10px]">
+                                        <img src={"/images/cross.png"} width={"22px"} height={"26px"} />
+                                        <ContentParagraph>
+                                            <span className="text-black">RICE Method</span> - the first downside is we need to collect data again and also this method relies heavily on guessing which would result on assumptions again. Honestly, we don’t want to go back to research and guessing again in this later stage.
+                                        </ContentParagraph>
+                                    </div>
+                                    <div className="flex gap-3 items-start pt-[10px]">
+                                        <img src={"/images/cross.png"} width={"22px"} height={"26px"} />
+                                        <ContentParagraph>
+                                            <span className="text-black">Impact-Effort</span> - this looks pretty simple and useful method at first but then later we realized that we need to develop the features when our client Razer or Shengsiong requests when even if this method is suggesting it is low impact or high effort.
+                                        </ContentParagraph>
+                                    </div>
+                                    <div className="flex gap-3 items-start pt-[10px]">
+                                        <img src={"/images/tick.png"} width={"22px"} height={"26px"} />
+                                        <div>
+                                            <ContentParagraph>
+                                                <span className="text-black">MOSCOW Method</span> - becomes the most convenient method for us. We used this method not only with our internal stakeholders but also with our precious clients to clear next milestones in our project with categorizing of MUST HAVE, SHOULD HAVE, COULD HAVE and WILL NOT HAVE.
+                                            </ContentParagraph>
+                                            <ContentParagraph>This method not only clear our next steps but also helps a lot in aligning with our development team regarding our roadmap and timelines.</ContentParagraph>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <MoscowMethodComponent />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Brainstorming and Low fidelity Wireframe " children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Once the key problems were prioritized, we moved quickly into solution ideation. Given time constraints, we intentionally avoided broad, time-heavy ideation methods like SCAMPER or Crazy 8s, and instead <span className="text-black">adopted a lean, decision-driven approach.</span></ContentParagraph>
+                                    <ContentParagraph>① Our core group—VP of Product, Product Manager, Product Owner, and a technical counterpart—worked together to evaluate each “How Might We” problem.</ContentParagraph>
+                                    <ContentParagraph>② As a product designer, I framed the user context and pain points, the team generated a small set of solution options, and we rapidly converged on one or two viable directions. </ContentParagraph>
+                                    <ContentParagraph>③ I then sketched these ideas in real time to make them tangible.</ContentParagraph>
+
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <SliderFrameComponent width="900px" title="Brainstorm sketches" numOfSlides="15">
+                                            {
+                                                new Array(15).fill(null).map((v, i) => {
+                                                    return <div><img src={`/images/bss-${i + 1}.png`} width={"100%"} /></div>
+                                                }
+                                                )
+                                            }
+                                        </SliderFrameComponent>
+                                        <ContentContainer>
+                                            <ContentParagraph>
+                                                These quick sketches played a critical role in bridging conversation and execution. By visualizing ideas immediately, we turned abstract discussions into something concrete the entire team could react to, challenge, and align on.<span className="text-black">From verbal ideation to visual thinking</span> , and <span className="text-black">from exploration to execution—</span>setting a strong, practical baseline for the solutions.
+                                            </ContentParagraph>
+                                        </ContentContainer>
+                                    </div>
+
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Sitemap (Content-centered Approach)" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Initially, we assumed a sitemap wasn’t necessary because the team was familiar with the product. However, as we began addressing deeper structural problems, it became clear that skipping this step was a mistake. We quickly realized that without a clear, shared view of the existing information architecture, solving complexity at the feature level would remain fragmented.</ContentParagraph>
+                                    <ContentParagraph>This exercise gave us a clear structural baseline, enabling more intentional ideation, cleaner feature placement, and a more scalable foundation for future growth.</ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <RevampedSitemapComponent />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Product Roadmap" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph><span className="text-black">Rather than delivering everything in a single, high-risk release, we chose a phased approach</span> that allows the team to ship value gradually, manage complexity, and align more closely with client expectations.</ContentParagraph>
+                                    <ContentParagraph>To support this approach, we evaluated available resources and timelines to ensure each phase could be delivered efficiently without compromising quality. </ContentParagraph>
+                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Preparation focuses on building a strong foundation and essential setup.</ContentParagraph>
+                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Core Functionality, rolling out most of the Must-have and Should-have features. </ContentParagraph>
+                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Refinement centers on optimization and polish, implementing <span className="text-black">Could-have</span> enhancements.</ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <ProductRoadmapComponent />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="UI Elements" children={
+                                <div>
+
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <div className="pb-[30px]"><img src={"/images/uie-1.png"} width={"800px"} /></div>
+                                        <div className="pb-[30px]"><img src={"/images/uie-2.png"} width={"800px"} /></div>
+                                        <div className="pb-[30px]"><img src={"/images/uie-3.png"} width={"800px"} /></div>
+                                        <div className="pb-[30px]"><img src={"/images/uie-4.png"} width={"800px"} /></div>
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+                            <ContentContainer>
+                                <div className="flex gap-4 items-center">
+                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                    <Title text="Conclusion of Ideation" />
+                                </div>
+
+                                <ContentParagraph>With problems clearly defined and solutions prioritized, the ideation phase moved from exploration into alignment. Through structured brainstorming, wireframing, sitemap refinement, and roadmap planning, we translated abstract ideas into clear, intentional decisions.</ContentParagraph>
+                                <ContentParagraph>This section includes low-fidelity wireframes, site map and timeline  — not as visual polish, but as a shared blueprint. They represent our collective understanding of the problem space, the priorities we committed to, and the direction we were confident enough to move forward with before investing in high-fidelity design.</ContentParagraph>
+                            </ContentContainer>
+                        </div>
+                        <ContentContainer py={"0px"} isFull={true}>
+                            <ContentDivider isFull={true} />
+                        </ContentContainer>
+                    </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[5] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Final Solution" />
+                                <ContentParagraph>Here, the story comes to life. This section presents the redesigned ESG Calculator experience, explaining how each design decision addressed the core problems. It showcases improvements across onboarding, data input, framework clarity, and feedback—connecting solutions directly back to user and business needs.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+
+                            <HideableComponent title="Phase 1 - Preparation" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>This phase focuses on establishing a strong foundation by introducing core preparation steps, data prerequisites, and critical configuration settings. Based on the feature prioritization, selected must-have and key should-have features are included in this phase to eliminate early friction and set users up for success.</ContentParagraph>
+                                    <ContentParagraph>This phase covers —</ContentParagraph>
+                                    <ContentParagraph>
+                                        ① framework selection,
+                                        <br />
+                                        ② preparation steps 1–3,
+                                        <br />
+                                        ③ the product tour, and
+                                        <br />
+                                        ④ the core assessment structure, including
+                                        <br />
+                                        ⑤ the main screen and sidebar hierarchy.
+                                    </ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="6">
+                                            <HmwSoltuionComponent
+                                                problem="How might we provide guided framework selection with previews to boost initial confidence and prevent early confusion?"
+                                                solution="Clearly separated tools and standards during framework selection, using distinct labels, logos, and descriptions to help users understand their purpose and choose confidently."
+                                                video="/images/solution-1-1.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we use progressive disclosure to reduce overwhelm when users input data for multiple assets?"
+                                                solution="Added an upfront asset setup step and surfaced assets in the sidebar, allowing users to focus on one asset at a time, progressively reveal related inputs, and still edit asset details at any stage."
+                                                video="/images/solution-1-2.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we accurately calculate emissions based on an organization’s percentage of ownership or responsibility?"
+                                                solution="Added an upfront ownership step as preparation Step 3 to calculate emissions based each organization’s share."
+                                                video="/images/solution-1-3.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we reduce the learning curve and help users quickly reorient themselves when returning to the tool? "
+                                                solution="Implemented a contextual product tour for new and returning users to accelerate onboarding, reduce relearning effort, and increase successful assessment completion."
+                                                video="/images/solution-1-4.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we make the reporting year and ownership percentage clearly visible and easy to edit at any point in the assessment flow?"
+                                                solution="Placed reporting year and ownership percentage as always-visible controls in the top bar, allowing users to review and edit them at any point in the assessment."
+                                                video="/images/solution-1-5.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we simplify the sections so that user could see it as a simple journey or divide the big section into smaller chunk and don’t miss Social and Governance sections?"
+                                                solution="Reorganized the assessment into a four-level structure, Asset → ESG pillar → Category → Detailed inputs — with the first three levels visible in the sidebar and detailed sections shown in the main view."
+                                                video="/images/solution-1-6.mp4"
+                                            />
+                                        </SliderFrameComponent>
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Phase 2 - MVP" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>This phase delivers the core Environmental calculation experience that users can complete end-to-end with confidence. It includes selected should-have and could-have features that improve accuracy, reduce friction, and strengthen trust in the results.</ContentParagraph>
+                                    <ContentParagraph>This phase covers —</ContentParagraph>
+                                    <ContentParagraph>
+                                        ① unit conversion and data upload,
+                                        <br />
+                                        ② Scope 1–3 calculations,
+                                        <br />
+                                        ③ section summaries, and
+                                        <br />
+                                        ④ emission removal.
+                                    </ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="5">
+                                            <HmwSoltuionComponent
+                                                problem="How might we add built-in unit conversion across Scope 1–3 and renewable energy inputs to reduce errors and user frustration from unit mismatches?"
+                                                solution="Embedded unit conversion directly within input fields and data entry modals, allowing users to switch units easily and prevent mismatches across Scope 1–3 and other inputs"
+                                                video="/images/solution-2-1.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we differentiate Scope 2 electricity into market-based and location-based inputs so users can accurately reflect green electricity purchases?"
+                                                solution="Split Scope 2 electricity into separate market-based and location-based sections, allowing users to input green electricity certificates and see their adjusted emissions results."
+                                                video="/images/solution-2-2.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we support all Scope 3 categories so users can accurately calculate and report their full Scope 3 emissions?"
+                                                solution="Supported full Scope 3 reporting by surfacing all 15 categories and enabling direct data import from the dedicated Scope 3 calculator, while still allowing manual input for flexibility."
+                                                video="/images/solution-2-3.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we create a clear, relatable assessment journey with saved progress and section summaries that encourage users to continue and return?"
+                                                solution="Added a section summary as the final step to reinforce progress and outcomes, while placing Save, Submit, and Cancel actions consistently at the bottom of the flow."
+                                                video="/images/solution-2-4.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we support emission removals so certified activities can be accurately reflected in emissions calculations?"
+                                                solution="Enabled emission removals to be applied in the final summary, allowing certified activities to be  reflected immediately in the overall emissions results."
+                                                video="/images/solution-2-5.mp4"
+                                            />
+                                        </SliderFrameComponent>
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Phase 3 - Efficiency" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>The final phase focuses on refinement, efficiency, and long-term adoption with Advanced conveniences, and experience enhancements are added. As per feature prioritiztion, we will have most of could have features will be put here.</ContentParagraph>
+                                    <ContentParagraph>This phase covers —</ContentParagraph>
+                                    <ContentParagraph>
+                                        ① feedback form
+                                        <br />
+                                        ② data import feature,
+                                        <br />
+                                        ③ Upload modal with previous-year data,
+                                        <br />
+                                        ④ improved terminology and formula breakdowns and
+                                        <br />
+                                        ⑤ refined Social and Governance structure.
+                                    </ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="5">
+                                            <HmwSoltuionComponent
+                                                problem="How might we make feedback easily accessible throughout the journey so users can share input at the right moment?"
+                                                solution="Made feedback accessible throughout the flow by placing a persistent feedback button at the bottom of the interface, allowing users to share input at the moment issues arise."
+                                                video="/images/solution-3-1.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we support data import (e.g., CSV) across different sections to reduce manual input effort and speed up assessment completion?"
+                                                solution="Enabled scope-based data import by adding dedicated import actions for each scope. Users can upload CSV files via a guided modal with downloadable templates."
+                                                video="/images/solution-3-2.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we reduce frustration during file uploads and dropdown selections while allowing users to reference previous-year data to build confidence?"
+                                                solution="Structured dropdowns to align with calculation logic and introduced a dedicated upload modal that displays previous-year data, reducing friction and improving user confidence."
+                                                video="/images/solution-3-3.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we improve terminology clarity for users of all experience levels while providing transparent formula breakdowns to build trust and reduce anxiety?"
+                                                solution="Standardized terminology through research-led language choices and added contextual tooltips with formula breakdowns, helping users of all experience understand calculations and trust the results."
+                                                video="/images/solution-3-4.mp4"
+                                            />
+                                            <HmwSoltuionComponent
+                                                problem="How might we simplify the Social and Governance sections using collapsible sub-sections to reduce endless scrolling and user fatigue?"
+                                                solution="By using collapsible sub-sections, users can see all required disclosures at a glance while focusing on one section at a time, reducing scrolling, cognitive load, and overall reporting fatigue."
+                                                video="/images/solution-3-5.mp4"
+                                            />
+                                        </SliderFrameComponent>
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+                            <ContentContainer isFull={true}>
+                                <ContentContainer py="0px">
+                                    <div className="flex gap-4 items-center">
+                                        <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
+                                        <Title text="Conclusion of Final Solution" />
+                                    </div>
+
+                                    <ContentParagraph>These solutions addressed the key barriers that were limiting the ESG Calculator’s commercial success — high user friction, low confidence in results, and inconsistent completion. By simplifying complex workflows and improving transparency around data and frameworks, the product became easier to use, easier to trust, and easier to adopt.</ContentParagraph>
+                                    <ContentParagraph>As a result, the redesigned experience not only improved user efficiency and confidence, but also strengthened the product’s market readiness, reduced operational support burden, and positioned the ESG Calculator as a more scalable and revenue-driving offering.</ContentParagraph>
+                                </ContentContainer>
+                                <div className="float-right">
+                                    <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                                        <div className="w-[30%]">
+                                            <div className="bg-white rounded-[24px] items-center justify-center flex h-[126px] w-[156px]">
+                                                <img src={"/images/figma.png"} width={"64px"} />
+                                            </div>
+
+                                        </div>
+                                        <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                                            <div className="flex justify-between items-center">
+                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Figma Prototype</h2>
+                                                <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" >
+                                                    <img src={"/images/arrow-outward.png"} />
+                                                </div>
+                                            </div>
+                                            <div className="w-[85%]">
+                                                <ContentParagraph>To experience the full revamp journey in detail, explore the  Figma files here.</ContentParagraph>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ContentContainer>
+                        </div>
+                        <ContentContainer py={"0px"} isFull={true}>
+                            <ContentDivider isFull={true} />
+                        </ContentContainer>
+                    </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[6] = nav } }}>
+                            <ContentContainer>
+                                <Title text="Challenge" />
+                                <ContentParagraph>Every project has its obstacles. This section reflects on the complexities of designing for ESG—balancing regulatory accuracy, diverse user maturity levels, and evolving business requirements—while aligning multiple stakeholders around a shared vision.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+
+                            <HideableComponent title="Ownership and Accountability" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Beyond designing interfaces, I was responsible for aligning multiple stakeholders including clients, developers, and internal leads. the challenge was not a lack of input, but the responsibility of synthesis and decision-making with multiple stakeholders involved.</ContentParagraph>
+                                    <ContentParagraph>I had to emphasize my ability to  ① lead cross-functional collaboration,
+                                        ② communicate confident decisions with clarity, and ③ take accountability for outcomes. — even when information was incomplete or opinions conflicted.</ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <img src={"/images/ownership.png"} width={"700px"} />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Feedback Handling" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Throughout the project, feedback came from many directions — clients, sales, customer support, engineers, and internal stakeholders — each with different priorities and expectations. The challenge was learning how to absorb large volumes of feedback without becoming reactive or design-by-committee. </ContentParagraph>
+                                    <ContentParagraph>I needed to ① distinguish between opinion and evidence, ② validate assumptions through research, and ③ decide which feedback aligned with user needs and business objectives.</ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <img src={"/images/feedback.png"} width={"700px"} />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="Limited Information on Competitors" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Unlike many consumer or typical SaaS products, researching competitor ESG tools was difficult due to limited access and transparency. Most ESG platforms require company registration, verified business details, and long onboarding processes before users can explore the product. On top of that, ESG standards and reporting practices vary widely across regions and industries.</ContentParagraph>
+                                    <ContentParagraph>To work around this, I ① focused less on direct UI comparisons and more on  ② understanding real user needs, workflows, and pain points through research. I supported this approach with stakeholder interviews, customer feedback, regulatory guidelines, and usability insights from our own product.</ContentParagraph>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <div className="mt-[15px] float-right  mb-[45px]">
+                                        <img src={"/images/competitor.png"} width={"700px"} />
+                                    </div>
+
+                                } />
+                            <ContentDivider />
+                        </div>
+                    </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[7] = nav } }}>
+                            <ContentContainer>
+                                <Title text="IMPACT" />
+                                <ContentParagraph>With the solution in place, we look at the results. This section demonstrates how the redesign improved usability, confidence, and efficiency through measurable outcomes, tying design changes to real user behavior and business impact.</ContentParagraph>
+                            </ContentContainer>
+                            <ContentDivider />
+
+                            <HideableComponent title="Background" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Do you remember the product north stars, that we mentioned on very first introduction section? If you don’t, here are these</ContentParagraph>
+
+                                    <div className="flex gap-4 mt-[20px]">
+                                        <BusinessProblemCard icon="/images/cake.png" text="1. Ease of use" />
+                                        <BusinessProblemCard icon="/images/file_box.png" text="2. Low confidence in data accuracy" />
+                                        <BusinessProblemCard icon="/images/boomerang.png" text="3. Drop-offs and poor retention" />
+                                    </div>
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <></>
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="1. Ease of Use" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Ease of use directly affects how efficiently users can complete ESG assessments without external help. By reducing complexity, we aimed to enable users to complete tasks independently,  lowering support dependency while increasing productivity and completion rates.</ContentParagraph>
+                                    <img src={"/images/ease-of-use.png"} width={"100%"} />
+                                    <div className="pt-[60px]">
+                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
+                                        <br />
+                                        <ContentParagraph>Improvements in usability directly reduced internal costs and increased customer efficiency.</ContentParagraph>
+                                        <br />
+                                        <div className="flex pt-[15px]">
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Reduced support costs" />
+                                            </div>
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Shorter time to close deals" />
+                                            </div>
+                                        </div>
+                                        <div className="flex pt-[15px]">
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Higher internal team efficiency" />
+                                            </div>
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Higher perceived product maturity" />
+                                            </div>
+                                        </div>
+                                        <div className="pt-[15px]">
+                                            <TickTextComponent text="Resources shifted from “hand-holding” to higher-value work" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <></>
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="2. Trust and Data Accuracy" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>Trust is the foundation of an ESG product. Users must feel confident that their inputs are interpreted correctly and that results are accurate and auditable. This initiative focused on improving transparency, terminology clarity, and data validation to strengthen confidence in the final.</ContentParagraph>
+                                    <img src={"/images/data-accuracy.png"} width={"100%"} />
+                                    <div className="pt-[60px]">
+                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
+                                        <br />
+                                        <ContentParagraph>Stronger confidence in results increased credibility and positioned the product as a reliable ESG solution.</ContentParagraph>
+                                        <br />
+                                        <div className="pt-[15px]">
+                                            <TickTextComponent text="Improved credibility of results" />
+                                        </div>
+                                        <div className="pt-[15px]">
+                                            <TickTextComponent text="Stronger brand trust" />
+                                        </div>
+                                        <div className="pt-[15px]">
+                                            <TickTextComponent text="Higher willingness to pay" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <></>
+                                } />
+                            <ContentDivider />
+
+                            <HideableComponent title="3. Drop-offs and Poor Retention" children={
+                                <div className="pt-[40px]">
+                                    <ContentParagraph>High friction during critical steps previously caused users to abandon the assessment or avoid returning altogether. By smoothing the end-to-end journey and reducing cognitive load, the goal was to increase completion, encourage repeat usage, and improve long-term adoption of the ESG Calculator.</ContentParagraph>
+                                    <ContentParagraph>Below are the metrics proving our enhancement in this section —</ContentParagraph>
+                                    <img src={"/images/retention.png"} width={"100%"} />
+                                    <div className="pt-[60px]">
+                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
+                                        <br />
+                                        <ContentParagraph>Lower friction and clearer value improved activation, retention, and long-term business performance.</ContentParagraph>
+                                        <br />
+                                        <div className="flex pt-[15px]">
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Higher activation rate" />
+                                            </div>
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Lower churn" />
+                                            </div>
+                                        </div>
+                                        <div className="flex pt-[15px]">
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Higher renewal rates" />
+                                            </div>
+                                            <div className="w-[50%]">
+                                                <TickTextComponent text="Stronger long-term revenue stability" />
+                                            </div>
+                                        </div>
+                                        <div className="pt-[15px]">
+                                            <TickTextComponent text="Product value becomes tangible, not theoretical" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+                                fullWidhtChildren={
+                                    <></>
+                                } />
+
+                        </div>
+                        <ContentContainer py={"0px"} isFull={true}>
+                            <ContentDivider isFull={true} />
+                        </ContentContainer>
+                    </ContentSectionWrapper>
+
+                    <ContentSectionWrapper>
+                        <div ref={(nav) => { if (nav) { navRefs.current[8] = nav } }}>
+                            <ContentContainer>
+                                <Title text="RETROSPECTIVE" />
+                                <ContentParagraph>This retrospective marks the conclusion of the case study. Leading the end-to-end redesign of the ESG calculation experience was a rewarding journey that strengthened my ability to navigate complexity, align cross-functional teams, and turn research insights into real business impact.</ContentParagraph>
+                                <ContentParagraph>
+                                    Through strong teamwork and a shared commitment to a research-driven design process, the project delivered meaningful product improvements and received positive feedback from company leadership.
+                                </ContentParagraph>
+                                <ContentParagraph>
+                                    <span className="text-black">
+                                        This is a data-backed story I am proud to share.
+                                    </span>
+                                </ContentParagraph>
+                            </ContentContainer>
+                        </div>
+                    </ContentSectionWrapper>
                 </div>
             </div >
-            <div className="pt-[200px]"></div>
+            <div className="py-[100px] px-[20px]">
+                <div className="bg-[#F4F4F4] w-[100%] h-[700px] flex justify-center items-end">
+                    <img src={"/images/team.png"} className="w-[900px]" />
+                </div>
+            </div>
         </div >
     )
 }
@@ -649,9 +1217,9 @@ const QualityQuestionSetsComponent = () => {
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
                 <div className="w-[30%]">
-                    <img src={"/images/quality-research.png"} height={"100%"} />
+                    <img src={"/images/quality-research.png"} width={"100%"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Qualitative Question Sets</h2>
                         <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
@@ -675,7 +1243,7 @@ const QualityQuestionSetsComponent = () => {
                             </ModalHeader>
                             <ModalBody className="p-[0px]">
                                 <div className="bg-[#F4F4F4] p-[30px]">
-                                    <div className="flex justify-between h-[650px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                    <div className="flex justify-between h-[600px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                                         <div className="w-[48%] h-fit bg-white rounded-[24px] py-[30px] px-[20px]">
                                             <div className="flex justify-between items-center">
                                                 <p className={`text-[${FontSizes.small}] text-[${Colors.title}] font-thin`}>Interview For <span className="text-[#FF5B5B]">Existing Users</span></p>
@@ -797,9 +1365,9 @@ const QuantityQuestionSetsComponent = () => {
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
                 <div className="w-[30%]">
-                    <img src={"/images/quantity-research.png"} height={"100%"} />
+                    <img src={"/images/quantity-research.png"} width={"100%"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Quantitative Question Sets</h2>
                         <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
@@ -851,9 +1419,9 @@ const UsabilityTestingPlanComponent = () => {
         <>
             <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
                 <div className="w-[30%]">
-                    <img src={"/images/usability-testing.png"} height={"100%"} />
+                    <img src={"/images/usability-testing.png"} width={"100%"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Usability Testing Plan</h2>
                         <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
@@ -1439,6 +2007,368 @@ const JourneyMapComponent = () => {
     )
 }
 
+const MoscowMethodComponent = () => {
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+    const [isDown, setIsDown] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
+
+    const onMouseDown = (e: MouseEvent) => {
+        e.preventDefault()
+        const slider: HTMLDivElement | null = scrollRef.current;
+        if (slider) {
+            setIsDown(true);
+            setStartX(e.pageX - slider.offsetLeft);
+            setStartY(e.pageY - slider.offsetTop);
+            setScrollLeft(slider.scrollLeft);
+            setScrollTop(slider.scrollTop);
+        }
+
+    };
+
+    const onMouseLeave = () => {
+        setIsDown(false);
+    };
+
+    const onMouseUp = () => {
+        setIsDown(false);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const slider = scrollRef.current;
+        if (slider) {
+            const x = e.pageX - slider.offsetLeft;
+            const y = e.pageY - slider.offsetTop;
+
+            // Drag speed multiplier (optional, 1 is default)
+            const walkX = (x - startX);
+            const walkY = (y - startY);
+
+            slider.scrollLeft = scrollLeft - walkX;
+            slider.scrollTop = scrollTop - walkY;
+        }
+
+    };
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/moscow-method-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>MOSCOW Method</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore a detailed breakdown
+                            of the MoSCoW prioritization method.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>MOSCOW Method</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div ref={scrollRef} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onMouseMove={onMouseMove} className="h-[650px] p-[32px] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img className="max-w-none" src={"/images/moscow-method.png"} width={"1700"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const RevampedSitemapComponent = () => {
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+    const [isDown, setIsDown] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
+
+    const onMouseDown = (e: MouseEvent) => {
+        e.preventDefault()
+        const slider: HTMLDivElement | null = scrollRef.current;
+        if (slider) {
+            setIsDown(true);
+            setStartX(e.pageX - slider.offsetLeft);
+            setStartY(e.pageY - slider.offsetTop);
+            setScrollLeft(slider.scrollLeft);
+            setScrollTop(slider.scrollTop);
+        }
+
+    };
+
+    const onMouseLeave = () => {
+        setIsDown(false);
+    };
+
+    const onMouseUp = () => {
+        setIsDown(false);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const slider = scrollRef.current;
+        if (slider) {
+            const x = e.pageX - slider.offsetLeft;
+            const y = e.pageY - slider.offsetTop;
+
+            // Drag speed multiplier (optional, 1 is default)
+            const walkX = (x - startX);
+            const walkY = (y - startY);
+
+            slider.scrollLeft = scrollLeft - walkX;
+            slider.scrollTop = scrollTop - walkY;
+        }
+
+    };
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/site-map-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Revamped Sitemap</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to explore a detailed breakdown
+                            of the sitemap structure.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Revamped Sitemap</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div ref={scrollRef} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onMouseMove={onMouseMove} className="h-[650px] p-[32px] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img className="max-w-none" src={"/images/site-map.png"} width={"1700"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+const ProductRoadmapComponent = () => {
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+    const [isDown, setIsDown] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
+
+    const onMouseDown = (e: MouseEvent) => {
+        e.preventDefault()
+        const slider: HTMLDivElement | null = scrollRef.current;
+        if (slider) {
+            setIsDown(true);
+            setStartX(e.pageX - slider.offsetLeft);
+            setStartY(e.pageY - slider.offsetTop);
+            setScrollLeft(slider.scrollLeft);
+            setScrollTop(slider.scrollTop);
+        }
+
+    };
+
+    const onMouseLeave = () => {
+        setIsDown(false);
+    };
+
+    const onMouseUp = () => {
+        setIsDown(false);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const slider = scrollRef.current;
+        if (slider) {
+            const x = e.pageX - slider.offsetLeft;
+            const y = e.pageY - slider.offsetTop;
+
+            // Drag speed multiplier (optional, 1 is default)
+            const walkX = (x - startX);
+            const walkY = (y - startY);
+
+            slider.scrollLeft = scrollLeft - walkX;
+            slider.scrollTop = scrollTop - walkY;
+        }
+
+    };
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    return (
+        <>
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                <div className="w-[30%]">
+                    <img src={"/images/roadmap-small.png"} width={"100%"} />
+                </div>
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Product Roadmap</h2>
+                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
+                            <img src={"/images/arrow-outward.png"} />
+                        </div>
+                    </div>
+                    <div className="w-[85%]">
+                        <ContentParagraph>Tap here to view the product roadmap that
+                            outlines phased delivery and feature rollout.</ContentParagraph>
+                    </div>
+
+
+                </div>
+            </div>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Product Roadmap</p>
+                            </ModalHeader>
+                            <ModalBody className="p-[0px]">
+                                <div className="bg-[#F4F4F4]">
+                                    <div ref={scrollRef} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onMouseMove={onMouseMove} className="h-[650px] p-[32px] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                        <img className="max-w-none" src={"/images/roadmap.png"} width={"1700"} />
+                                    </div>
+                                </div>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+        </>
+
+    )
+}
+
+type HmwSolutionComponentProps = {
+    problem: string,
+    solution: string,
+    video: string
+}
+
+const HmwSoltuionComponent: FC<HmwSolutionComponentProps> = ({ problem, solution, video }) => {
+    const [showPlayBtn, setShowPlayBtn] = useState(true)
+    const [play, setPlay] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const playPause = () => {
+        if (play) {
+            videoRef.current?.pause()
+        } else {
+            videoRef.current?.play()
+        }
+        setPlay((prev) => !prev)
+    }
+    return (
+        <div>
+            <div className="w-[100%] rounded-[24px] bg-white p-[32px] ">
+                <ContentDivider isFull={true} />
+                <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
+                    Problems (HMW)
+                </p>
+                <br />
+                <ContentList>{problem}</ContentList>
+                <br /><br />
+                <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
+                    Solution Idea
+                </p>
+                <br />
+                <ContentList>{solution}</ContentList>
+            </div>
+            <div className="w-[100%] rounded-[24px] bg-white p-[32px] mt-[20px]">
+                <div className="flex gap-2 items-center">
+                    <img src={"/images/multi-star.png"} width={"14px"} height={"14px"} />
+                    <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
+                        UI Solution
+                    </p>
+                </div>
+                <div className="pt-[20px]">
+                    <div className="relative" onMouseEnter={() => setShowPlayBtn(true)} onMouseLeave={() => setShowPlayBtn(false)}>
+                        <div className="absolute flex justify-center items-center w-[100%] h-[100%] z-[10]">
+                            {
+                                showPlayBtn ?
+                                    // <button className="cursor-pointer" onClick={() => playPause()}>
+                                    //     <img src={"/images/play.png"} width={"90px"} height={"90px"} />
+                                    // </button>
+                                    <PlayPauseButtonComponent play={play} handleClick={() => playPause()} />
+                                    :
+                                    <></>
+                            }
+
+                        </div>
+                        <div className="absoute z-[5]">
+                            <video ref={videoRef} src={video} controls={false} className="rounded-[24px]" height={"620px"} />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div className="w-[100%] rounded-[24px] bg-white p-[32px] mt-[20px]">
+                <ContentDivider isFull={true} />
+                <div className="flex justify-between items-center w-[100%]">
+                    <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
+                        UI Before Revamp
+                    </p>
+                    <div className="flex gap-2 items-center">
+                        <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
+                            compare with previous version
+                        </p>
+                        <img src={"/images/arrow-outward.png"} width={"10px"} />
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    )
+}
+
 
 type ContentSectionWrapperProps = {
     children: React.ReactNode
@@ -1531,10 +2461,11 @@ const CustomerExperienceVideo: FC<CustomerExperienceVideoProps> = ({ link, icon,
 type NavigationProps = {
     text: string,
     isActive?: boolean
+    handleClick: () => void
 }
-const Navigation: FC<NavigationProps> = ({ text, isActive }) => {
+const Navigation: FC<NavigationProps> = ({ text, isActive, handleClick }) => {
     return (
-        <div className="pb-[20px]">
+        <div className="pb-[20px] cursor-pointer" onClick={handleClick}>
             {isActive ?
                 <p className={`text-[${FontSizes.small}] text-[${Colors.title}]`}>{text}</p>
                 :
@@ -1687,5 +2618,68 @@ const HideableComponent: FC<HideableComponentProps> = ({ defaultHide, title, chi
         </>
 
 
+    )
+}
+
+type SliderFrameComponentProps = {
+    width: string,
+    height?: string,
+    title: string,
+    numOfSlides: string,
+    children: React.ReactNode
+}
+
+const SliderFrameComponent: FC<SliderFrameComponentProps> = ({ width, height, title, numOfSlides, children }) => {
+    const [currentIndex, setCurrentIndex] = useState(1);
+    const sliderRef = useRef<Slider>(null);
+    return (
+        <div style={{ width: width, height: height, backgroundColor: '#F4F4F4' }} className="p-[24px] rounded-[24px]">
+            <div className="flex justify-between items-center p-[20px] pb-[30px]">
+                <div className="flex justify-start items-center gap-3">
+                    <p className={`text-[${Colors.content}] text-[${FontSizes.medium}]`}>{title} </p>
+                    <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}><span className={`text-[${FontSizes.medium}]`}>{currentIndex} </span> of {numOfSlides}</p>
+                </div>
+                <div className="flex justify-end items-center gap-3">
+                    <button className="w-[56px] h-[56px] rounded-full bg-white flex items-center justify-center border-[1px] border-[#E3E3E3] cursor-pointer" onClick={() => sliderRef.current?.slickPrev()}>
+                        <img src={"/images/left-arrow.png"} width={"18px"} />
+                    </button>
+                    <button className="w-[137px] h-[56px] rounded-[32px] bg-[#FF5B5B] flex items-cetner justify-center border-[1px] border-[#E3E3E3] cursor-pointer" onClick={() => sliderRef.current?.slickNext()}>
+                        <div className="flex items-center justify-center gap-3">
+                            <p className="text-[20px] text-white">Next</p>
+                            <img src={"/images/right-arrow.png"} width={"18px"} height={"18px"} />
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+            <Slider {...sliderFrameSetting} ref={sliderRef} afterChange={(index) => setCurrentIndex(index + 1)}>
+                {children}
+            </Slider>
+        </div>
+    )
+}
+
+type PlayPauseButtonComponentProps = {
+    play: boolean,
+    handleClick: () => void
+}
+
+const PlayPauseButtonComponent: FC<PlayPauseButtonComponentProps> = ({ play, handleClick }) => {
+    return (
+        <div className={`${styles.glassContainer} w-[90px] h-[90px] rounded-full text-white justify-center items-center cursor-pointer`} style={{ zIndex: 99 }} onClick={handleClick}>
+            <img src={play ? '/icons/pause.svg' : '/icons/play.svg'} className='w-[32px] h-[32px]' style={{ marginLeft: play ? '0px' : '5px' }} />
+        </div>
+    )
+}
+
+type TickTextComponentProps = {
+    text: string
+}
+const TickTextComponent: FC<TickTextComponentProps> = ({ text }) => {
+    return (
+        <div className="flex gap-3 items-center">
+            <img src={"/images/tick-circle.png"} width={"20px"} />
+            <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>{text}</p>
+        </div>
     )
 }
