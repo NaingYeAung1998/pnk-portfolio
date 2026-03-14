@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 const sfProFont = localFont({
-  src: '../../public/fonts/sfpro-regular.otf',
+  src: '../../public/fonts/sfpro.ttf',
   variable: '--sf-pro', // Optional: for CSS variables
 });
 

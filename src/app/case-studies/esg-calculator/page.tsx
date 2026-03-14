@@ -188,7 +188,7 @@ export default function EsgCalculator() {
                         <CustomerExperienceVideo link="https://www.youtube.com/embed/eXsZdLYeK4s?si=6Zqv2fAVm9AuRE0c" icon="/images/dp.png" title="Durapower Group"
                             content="“...Calculator improves the accuracy and credibility
                                     of emissions tracking across our value chain,as
-                                    it is built in alignment with GHG protocol...”"
+                                    it is built in alignment...”"
                             customer="Lay See Tan, Group CFO and Sustainability Officer" />
                     </div>
                 </div>
@@ -272,10 +272,10 @@ export default function EsgCalculator() {
                                                 <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Environmental</h2>
                                                 <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
                                             </div>
-                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                                <ContentList><span className="text-black">Carbon emissions and energy consumption</span></ContentList>
-                                                <ContentList><span className="text-black">Waste management and pollution</span></ContentList>
-                                                <ContentList><span className="text-black">Use of natural resources and biodiversity</span></ContentList>
+                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
+                                                <ContentList lineHeight="10px"><span className="text-black">Carbon emissions and energy consumption</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Waste management and pollution</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Use of natural resources and biodiversity</span></ContentList>
                                             </div>
                                         </div>
 
@@ -284,10 +284,10 @@ export default function EsgCalculator() {
                                                 <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Social</h2>
                                                 <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
                                             </div>
-                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                                <ContentList><span className="text-black">Labor practices, diversity, and inclusion</span></ContentList>
-                                                <ContentList><span className="text-black">Human rights and supply chain management</span></ContentList>
-                                                <ContentList><span className="text-black">Community relations and customer satisfaction</span></ContentList>
+                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
+                                                <ContentList lineHeight="10px"><span className="text-black">Labor practices, diversity, and inclusion</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Human rights and supply chain management</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Community relations and customer satisfaction</span></ContentList>
                                             </div>
                                         </div>
 
@@ -296,11 +296,11 @@ export default function EsgCalculator() {
                                                 <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Governance</h2>
                                                 <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
                                             </div>
-                                            <div className="bg-white w-[70%] h-[100%] rounded-[24px] p-[30px]">
-                                                <ContentList><span className="text-black">Board composition and structure</span></ContentList>
-                                                <ContentList><span className="text-black">Executive compensation</span></ContentList>
-                                                <ContentList><span className="text-black">Internal controls and audits</span></ContentList>
-                                                <ContentList><span className="text-black">Business ethics and transparency</span></ContentList>
+                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
+                                                <ContentList lineHeight="10px"><span className="text-black">Board composition and structure</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Executive compensation</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Internal controls and audits</span></ContentList>
+                                                <ContentList lineHeight="10px"><span className="text-black">Business ethics and transparency</span></ContentList>
                                             </div>
                                         </div>
                                     </div>
@@ -2495,12 +2495,13 @@ const ContentParagraph: FC<ContentParagraphProps> = ({ children }) => {
 
 type ContentListProps = {
     children: React.ReactNode
-    fontSize?: string
+    fontSize?: string,
+    lineHeight?: string
 }
-const ContentList: FC<ContentListProps> = ({ children, fontSize }) => {
+const ContentList: FC<ContentListProps> = ({ children, fontSize, lineHeight }) => {
     return (
         <div className="pl-[20px]">
-            <li style={{ fontSize: fontSize || '' }}><ContentParagraph>{children}</ContentParagraph></li>
+            <li style={{ fontSize: fontSize || '', color: '#777777', lineHeight: lineHeight || '' }}><ContentParagraph>{children}</ContentParagraph></li>
         </div>
     )
 }
@@ -2509,21 +2510,22 @@ type ContentContainerProps = {
     children: React.ReactNode,
     id?: string,
     py?: string,
-    isFull?: boolean
+    isFull?: boolean,
+    pb?: string,
 }
 
-const ContentContainer: FC<ContentContainerProps> = ({ children, id, isFull, py }) => {
+const ContentContainer: FC<ContentContainerProps> = ({ children, id, isFull, py, pb }) => {
     return (
         <>
             {isFull ?
                 <div id={id} className="float-right w-[100%]">
-                    <div className={`w-[100%] flow-root`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }}>
+                    <div className={`w-[100%] flow-root`} style={{ paddingTop: py ? py : "120px", paddingBottom: pb ? pb : py ? py : "120px" }}>
                         {children}
                     </div>
                 </div>
                 :
                 <div id={id} className="float-right">
-                    <div className={`w-[700px]`} style={{ paddingTop: py ? py : "120px", paddingBottom: py ? py : "120px" }} >
+                    <div className={`w-[700px]`} style={{ paddingTop: py ? py : "120px", paddingBottom: pb ? pb : py ? py : "120px" }} >
                         {children}
                     </div>
                 </div>
@@ -2594,8 +2596,8 @@ const HideableComponent: FC<HideableComponentProps> = ({ defaultHide, title, chi
     const [hide, setHide] = useState<boolean>(defaultHide ? defaultHide : true);
     return (
         <>
-            <ContentContainer py="60px">
-                <div className="flex justify-between items-center">
+            <ContentContainer py="0px" pb="60px">
+                <div className="flex justify-between items-center cursor-pointer pt-[60px]" onClick={() => setHide(!hide)}>
                     <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>{title}</h2>
                     <img className="cursor-pointer" src={hide ? '/images/arrow-downward.png' : '/images/arrow-upward.png'} width={"20px"} height={"20px"} onClick={() => setHide(!hide)} />
                 </div>
@@ -2610,7 +2612,7 @@ const HideableComponent: FC<HideableComponentProps> = ({ defaultHide, title, chi
                 hide ?
                     <></>
                     :
-                    <ContentContainer isFull={true} py="0px">
+                    <ContentContainer isFull={true} py="0px" pb="75px">
                         {fullWidhtChildren}
                     </ContentContainer>
             }
