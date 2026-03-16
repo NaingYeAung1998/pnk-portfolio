@@ -967,7 +967,7 @@ export default function EsgCalculator() {
                                     <ContentParagraph>As a result, the redesigned experience not only improved user efficiency and confidence, but also strengthened the product’s market readiness, reduced operational support burden, and positioned the ESG Calculator as a more scalable and revenue-driving offering.</ContentParagraph>
                                 </ContentContainer>
                                 <div className="float-right">
-                                    <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+                                    {/* <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
                                         <div className="w-[30%]">
                                             <div className="bg-white rounded-[24px] items-center justify-center flex h-[126px] w-[156px]">
                                                 <img src={"/images/figma.png"} width={"64px"} />
@@ -987,7 +987,7 @@ export default function EsgCalculator() {
 
 
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                             </ContentContainer>
@@ -1202,9 +1202,7 @@ export default function EsgCalculator() {
                 </div>
             </div >
             <div className="py-[100px] px-[20px]">
-                <div className="bg-[#F4F4F4] w-[100%] h-[700px] flex justify-center items-end">
-                    <img src={"/images/team.png"} className="w-[900px]" />
-                </div>
+                <img src={"/images/team.png"} className="w-[100%]" />
             </div>
         </div >
     )
@@ -1213,17 +1211,18 @@ export default function EsgCalculator() {
 
 const QualityQuestionSetsComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/quality-research.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Qualitative Question Sets</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1234,12 +1233,12 @@ const QualityQuestionSetsComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 font-medium border-b-[1px] border-b-[#E3E3E3]">
-                                <p className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Qualitative Question Set</p>
+                            <ModalHeader className="flex items-center font-medium border-b-[1px] border-b-[#E3E3E3]">
+                                <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}]`}>Qualitative Question Set</h2>
                             </ModalHeader>
                             <ModalBody className="p-[0px]">
                                 <div className="bg-[#F4F4F4] p-[30px]">
@@ -1272,28 +1271,32 @@ const QualityQuestionSetsComponent = () => {
                                             <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Data Accuracy & Trust</h2>
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">How confident were you in the results generated by the calculator?</p> </ContentList>
                                             <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you verify any of the outputs manually or compare them with other  tools and spreadsheets?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Were the units, formats, or frameworks (e.g. GHG Protocol, CDP, SBTi) aligned with what you needed for reporting?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you encounter any challenges aligning your data with the required frameworks or standards?</p></ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Value & Outcome</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How did the calculator help you complete your ESG reporting or carbon disclosure?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did the results support your company’s reporting goals or internal decision-making?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What aspects of the tool felt most valuable to you?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Were there any features or outputs you found unnecessary or confusing?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Support & Improvement</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Was it easy to understand what data you needed before starting?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Did you use any onboarding guide or tutorial? If so, was it helpful?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When you faced difficulties, how easy was it to find help or support?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">If you were to use it again, what would you want improved?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">If you could change one thing about the tool, what would it be?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Wrap-up</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Would you recommend this calculator to another company preparing for ESG reporting? Why or Why not?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How confident are you about using it for next year’s report?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Is there anything else you wish the tool could do to make reporting easier?</p> </ContentList>
                                         </div>
 
                                         <div className="w-[48%] h-fit bg-white rounded-[24px] py-[30px] px-[20px]">
@@ -1320,31 +1323,33 @@ const QualityQuestionSetsComponent = () => {
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Trust & Credibility Expectations</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">If your company were to use an ESG calculator, what features or outcomes would be most important to you?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What would make you trust the results generated by an ESG calculator?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How important are standards or frameworks (e.g. GHG Protocol, GRI, CDP, SBTi) in influencing your confidence?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What kind of transparency (e.g. methodology, emission factors, assumptions) would you expect from such a tool?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Needs & Decision Triggers</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">If your company were to adopt an ESG calculator, what problems would you expect it to solve?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What features or capabilities would be non-negotiable for you?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">How important is integration with your existing systems, data sources, or spreadsheets?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What would prevent your company from adopting a tool like this?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Perceived Value & Risk</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What outcomes would make an ESG calculator feel worth the investment?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What risks (e.g. inaccurate data, compliance issues, complexity) would concern you the most?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Are there any features you would expect to be unnecessary or overcomplicated?</p> </ContentList>
 
                                             <ContentDivider isFull={true} />
 
-                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Introduction</h2>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Can you tell me a bit about your role and how you’re evolved in your company’s ESG reporting or data collection?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">When was the last time you used our ESG calculator tool?</p> </ContentList>
-                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What wss your main purpose for using it (e.g. reporting, internal review?)</p> </ContentList>
+                                            <h2 className={`text-[${FontSizes.medium}] text-[${Colors.content}] font-medium pb-[20px]`}>Wrap-up</h2>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Under what conditions would you recommend an ESG calculator to another company?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">What would increase your confidence in using an ESG calculator for future reporting?</p> </ContentList>
+                                            <ContentList fontSize="10px"><p className="text-[10px] text-black">Is there anything else you would expect from an ESG calculator to make adoption easier?</p> </ContentList>
                                         </div>
                                     </div>
                                 </div>
@@ -1361,17 +1366,18 @@ const QualityQuestionSetsComponent = () => {
 
 const QuantityQuestionSetsComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/quantity-research.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Quantitative Question Sets</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1382,7 +1388,7 @@ const QuantityQuestionSetsComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1415,17 +1421,19 @@ const QuantityQuestionSetsComponent = () => {
 
 const UsabilityTestingPlanComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/usability-testing.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Usability Testing Plan</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1437,7 +1445,7 @@ const UsabilityTestingPlanComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1529,17 +1537,19 @@ const UsabilityTestingPlanComponent = () => {
 
 const StudyPlanComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/study-plan.png"} width={"100%"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Study Plan</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1551,7 +1561,7 @@ const StudyPlanComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1628,17 +1638,19 @@ const StudyPlanComponent = () => {
 
 const PersonaOneComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                <div className="w-[30%]">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
+                <div className="">
                     <img src={"/images/shengsion-persona.png"} width={"170px"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[80%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Persona 1 - ShengSiong</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1649,7 +1661,7 @@ const PersonaOneComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1675,17 +1687,19 @@ const PersonaOneComponent = () => {
 
 const PersonaTwoComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                <div className="w-[30%]">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
+                <div className="w-[20%]">
                     <img src={"/images/razer-persona.png"} width={"170px"} />
                 </div>
-                <div className="w-[70%] h-[100%] rounded-[24px] p-[30px]">
+                <div className="w-[80%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Persona 2 - Razer</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1696,7 +1710,7 @@ const PersonaTwoComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1722,17 +1736,19 @@ const PersonaTwoComponent = () => {
 
 const AffinityMapOneComponent = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/affinity-one-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Affinity Map - Step 1</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1744,7 +1760,7 @@ const AffinityMapOneComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1769,19 +1785,20 @@ const AffinityMapOneComponent = () => {
 }
 
 const AffinityMapTwoComponent = () => {
-
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/affinity-one-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Affinity Map - Step 2</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1793,7 +1810,7 @@ const AffinityMapTwoComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1818,19 +1835,20 @@ const AffinityMapTwoComponent = () => {
 }
 
 const EmpathyMapComponent = () => {
-
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/empathy-map-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Empathy Map</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1842,7 +1860,7 @@ const EmpathyMapComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1867,19 +1885,20 @@ const EmpathyMapComponent = () => {
 }
 
 const PainGainComponent = () => {
-
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
+
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/pain-gain-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Pains and Gains</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1890,7 +1909,7 @@ const PainGainComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -1962,17 +1981,18 @@ const JourneyMapComponent = () => {
 
     };
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/affinity-one-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Joureny Mapping</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -1983,7 +2003,7 @@ const JourneyMapComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -2054,17 +2074,18 @@ const MoscowMethodComponent = () => {
 
     };
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/moscow-method-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>MOSCOW Method</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -2075,7 +2096,7 @@ const MoscowMethodComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -2146,17 +2167,18 @@ const RevampedSitemapComponent = () => {
 
     };
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/site-map-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Revamped Sitemap</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -2167,7 +2189,7 @@ const RevampedSitemapComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -2238,17 +2260,18 @@ const ProductRoadmapComponent = () => {
 
     };
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [hover, setHover] = useState(false);
     return (
         <>
-            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
+            <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onOpen}>
                 <div className="w-[30%]">
                     <img src={"/images/roadmap-small.png"} width={"100%"} />
                 </div>
                 <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
                     <div className="flex justify-between items-center">
                         <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Product Roadmap</h2>
-                        <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" onClick={onOpen}>
-                            <img src={"/images/arrow-outward.png"} />
+                        <div className="rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" style={{ backgroundColor: hover ? '#FF5B5B' : 'white' }} >
+                            <img src={hover ? "/images/arrow-outward-white.png" : "/images/arrow-outward.png"} />
                         </div>
                     </div>
                     <div className="w-[85%]">
@@ -2259,7 +2282,7 @@ const ProductRoadmapComponent = () => {
 
                 </div>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl" classNames={{ closeButton: 'mt-[8px]' }}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -2269,7 +2292,7 @@ const ProductRoadmapComponent = () => {
                             <ModalBody className="p-[0px]">
                                 <div className="bg-[#F4F4F4]">
                                     <div ref={scrollRef} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onMouseMove={onMouseMove} className="h-[650px] p-[32px] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                                        <img className="max-w-none" src={"/images/roadmap.png"} width={"1700"} />
+                                        <img className="max-w-none" src={"/images/roadmap.png"} width={"1200"} />
                                     </div>
                                 </div>
                             </ModalBody>
@@ -2310,7 +2333,7 @@ const HmwSoltuionComponent: FC<HmwSolutionComponentProps> = ({ problem, solution
                 </p>
                 <br />
                 <ContentList>{problem}</ContentList>
-                <br /><br />
+                <br />
                 <p className={`text-[${Colors.title}] text-[${FontSizes.small}]`}>
                     Solution Idea
                 </p>
@@ -2467,7 +2490,7 @@ const Navigation: FC<NavigationProps> = ({ text, isActive, handleClick }) => {
     return (
         <div className="pb-[20px] cursor-pointer" onClick={handleClick}>
             {isActive ?
-                <p className={`text-[${FontSizes.small}] text-[${Colors.title}]`}>{text}</p>
+                <p className={`text-[${FontSizes.small}] text-[#111111] font-bold`}>{text}</p>
                 :
                 <p className={`text-[${FontSizes.small}] text-[#8F969D] `}>{text}</p>}
         </div>

@@ -5,6 +5,6 @@ export const FontSizes = {
 }
 
 export const Colors = {
-    title: 'black',
+    title: '#111111',
     content: '#777777'
 }

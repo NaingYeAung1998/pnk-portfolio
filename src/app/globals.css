@@ -36,5 +36,6 @@ p {
 
 h2 {
   letter-spacing: var(--tracking-widest);
+  font-weight: bolder;
   /* 0.05em */
 }
