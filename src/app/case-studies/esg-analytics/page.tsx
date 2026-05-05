@@ -39,6 +39,10 @@ const navigations = [
         id: 'introduction',
     },
     {
+        title: 'OVERVIEW',
+        id: 'overview',
+    },
+    {
         title: 'BUSINESS PROBLEMS',
         id: 'businessProblems',
     },
@@ -47,20 +51,8 @@ const navigations = [
         id: 'discovery',
     },
     {
-        title: 'PROBLEM DEFINE',
-        id: 'problemDefine',
-    },
-    {
-        title: 'IDEATION',
-        id: 'ideation',
-    },
-    {
         title: 'FINAL SOLUTION',
         id: 'finalSolution',
-    },
-    {
-        title: 'CHALLENGE',
-        id: 'challenge',
     },
     {
         title: 'IMPACT',
@@ -208,60 +200,10 @@ hot spots of emissions in our supply chain. ...”"
                             </ContentContainer>
                             <ContentDivider />
 
-                            <HideableComponent title="What is ESG?"
+                            <HideableComponent title="1. Who is ESGpedia?"
                                 children={
                                     <div className="pt-[40px]">
-                                        <ContentParagraph>ESG stands for Environmental, Social, and Governance, a set of standards used to measure a company's impact on the environment and society, and how transparently it is managed.</ContentParagraph>
-                                        <ContentParagraph>By supporting Singapore’s Green Plan 2030, ESG builds trust with customers and partners, boosts innovation, and ensures long-term success in a world that values sustainability.</ContentParagraph>
-                                    </div>
-                                }
-                                fullWidhtChildren={
-                                    <div className="mt-[-15px] float-right">
-                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                            <div className="p-[25px]">
-                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Environmental</h2>
-                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                            </div>
-                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
-                                                <ContentList lineHeight="10px"><span className="text-black">Carbon emissions and energy consumption</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Waste management and pollution</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Use of natural resources and biodiversity</span></ContentList>
-                                            </div>
-                                        </div>
-
-                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                            <div className="p-[25px]">
-                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Social</h2>
-                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                            </div>
-                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
-                                                <ContentList lineHeight="10px"><span className="text-black">Labor practices, diversity, and inclusion</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Human rights and supply chain management</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Community relations and customer satisfaction</span></ContentList>
-                                            </div>
-                                        </div>
-
-                                        <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between">
-                                            <div className="p-[25px]">
-                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}]`}>Governance</h2>
-                                                <p className={`text-[${Colors.content}] text-[${FontSizes.small}]`}>standards</p>
-                                            </div>
-                                            <div className="bg-white w-[70%] rounded-[24px] p-[25px]">
-                                                <ContentList lineHeight="10px"><span className="text-black">Board composition and structure</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Executive compensation</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Internal controls and audits</span></ContentList>
-                                                <ContentList lineHeight="10px"><span className="text-black">Business ethics and transparency</span></ContentList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            />
-                            <ContentDivider />
-                            <HideableComponent title="Who is ESGpedia?"
-                                children={
-                                    <div className="pt-[40px]">
-                                        <ContentParagraph>ESGpedia is a Singapore-headquartered ESG data and technology company that provides a one-stop digital platform designed to help businesses, SMEs, and financial institutions across the Asia-Pacific region measure, manage, and report on Environmental, Social, and Governance (ESG) performance.</ContentParagraph>
-                                        <ContentParagraph>The platform aggregates millions of sustainability data points and offers end-to-end solutions such as carbon accounting, ESG reporting, supply chain engagement, and sustainable finance tools, enabling organizations to comply with global and local standards, improve transparency, and support initiatives like the Asia-Pacific Single Accesspoint for ESG Data (SAFE) and the ESCAP Sustainable Business Network (ESBN) Asia-Pacific Green Deal.</ContentParagraph>
+                                        <ContentParagraph>ESGpedia is a Singapore-based ESG data and technology platform that helps businesses measure, manage, and report their Environmental, Social, and Governance (ESG) performance. It provides end-to-end solutions for measuring, managing, and reporting sustainability performance, helping organizations improve transparency and meet global standards.</ContentParagraph>
                                     </div>
                                 }
                                 fullWidhtChildren={
@@ -280,31 +222,54 @@ hot spots of emissions in our supply chain. ...”"
                                 }
                             />
                             <ContentDivider />
-                            <HideableComponent title="How does ESG calculator work?"
+                            <HideableComponent title="2. What is Analytics Module"
                                 children={
                                     <div className="pt-[40px]">
-                                        <ContentParagraph>ESGpedia’s ESG Calculator is a built-in, standards-aligned tool that helps businesses and SMEs quantify their greenhouse gas (GHG) emissions and related sustainability metrics by converting operational and supply chain data into Scope 1, 2, and 3 emissions in accordance with the GHG Protocol and ISO 14064 methodologies. </ContentParagraph>
-                                        <ContentParagraph>The calculator uses an extensive database of localised emission factors and detailed input categories (such as fuel use, electricity consumption, travel, materials, and value-chain activities) to generate credible, automated carbon footprint results that can be tracked, analysed, and reported within the broader ESGpedia platform for compliance with international and local reporting requirements. </ContentParagraph>
+                                        <ContentParagraph>The Analytics Module is a centralized feature within ESGpedia that enables users to explore and interpret their ESG data across Environmental, Social, and Governance dimensions. </ContentParagraph>
+                                        <ContentParagraph>It aggregates data collected from assessments and calculators, and presents it through structured dashboards that support performance tracking, trend analysis, and detailed breakdowns.</ContentParagraph>
+                                        <ContentParagraph>By organizing complex datasets into a consistent and navigable format, the module helps users move from raw data to clear insights.</ContentParagraph>
                                     </div>
                                 }
                                 fullWidhtChildren={
                                     <div className="mt-[-15px] float-right">
-                                        <img src={'/images/old-vs-new-ui.png'} width={"980px"} height={"850px"} />
+                                        <img src={'/images/analytics-module.png'} width={"810px"} height={"850px"} />
                                     </div>
                                 }
                             />
                             <ContentDivider />
-                            <ContentContainer>
-                                <div className="flex gap-4 items-center">
-                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                    <Title text="Overview - Conclusion" />
-                                </div>
+                            <HideableComponent title="3. What does this feature solve?"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>Prior to the Analytics Module, ESGpedia primarily supported data collection, with limited ability for users to interpret or act on the information they provided.</ContentParagraph>
+                                        <ContentParagraph>This feature addresses key challenges:</ContentParagraph>
+                                        <div className="flex gap-3 items-center pb-[8px]">
+                                            <img src={"/images/checked-circle.png"} width={"20px"} />
+                                            <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[0px]`}>Lack of visibility into ESG performance</p>
+                                        </div>
+                                        <div className="flex gap-3 items-center pb-[8px]">
+                                            <img src={"/images/checked-circle.png"} width={"20px"} />
+                                            <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[0px]`}>Difficulty identifying key emission drivers and risk areas</p>
+                                        </div>
+                                        <div className="flex gap-3 items-center pb-[8px]">
+                                            <img src={"/images/checked-circle.png"} width={"20px"} />
+                                            <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[0px]`}>No clear way to track progress over time</p>
+                                        </div>
+                                        <div className="flex gap-3 items-center pb-[20px]">
+                                            <img src={"/images/checked-circle.png"} width={"20px"} />
+                                            <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[0px]`}>Reliance on external tools for analysis </p>
+                                        </div>
 
-                                <ContentParagraph>This case study documents the full revamp of ESGpedia’s ESG Calculator, focused on improving accuracy, usability, and business outcomes.</ContentParagraph>
-                                <ContentParagraph>Through this project, I introduced a Human-Centered Design (HCD) process to the company, establishing a habit of user interviews and usability testing rather than relying on assumptions. This approach ensured that time and resources were invested in solving the right problems and delivering meaningful, measurable results when the product was launched. Read on to explore my approach, the key decisions I made, and the outcomes achieved by the end of the project.</ContentParagraph>
-                            </ContentContainer>
+                                        <ContentParagraph>The Analytics Module bridges this gap by transforming fragmented data into structured insights, enabling users to understand their performance and make informed decisions within the platform.</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className=" float-right">
+                                        <img src={'/images/analytics-feature.png'} width={"810px"} height={"850px"} />
+                                    </div>
+                                }
+                            />
                         </div>
-                        <ContentContainer py={"0px"} isFull={true}>
+                        <ContentContainer py={"60px"} pb={"0px"} isFull={true}>
                             <ContentDivider isFull={true} />
                         </ContentContainer>
                     </ContentSectionWrapper>
@@ -315,112 +280,43 @@ hot spots of emissions in our supply chain. ...”"
                     <ContentSectionWrapper>
                         <div ref={(nav) => { if (nav) { navRefs.current[2] = nav } }}>
                             <ContentContainer>
-                                <Title text="Researches" />
-                                <ContentParagraph>With the context established, let’s move into researches. This section tells the story of how we listened to users and observed real behaviors through qualitative interviews, surveys, usability testing, diary studies, and Microsoft Clarity. Together, these methods helped uncover <span className="text-black">the frustrations, doubts, and hidden behaviors behind the numbers.</span></ContentParagraph>
+                                <Title text="Business Problems & Strategy" />
+                                <ContentParagraph>ESGpedia successfully enabled companies to collect ESG data across emissions, workforce, and governance metrics. However, the product stopped at data collection. There was no clear way for users to interpret performance, identify risks, or take action.</ContentParagraph>
+                                <ContentParagraph>This created a structural gap between data input and decision-making.</ContentParagraph>
                             </ContentContainer>
                             <ContentDivider />
-                            <HideableComponent title="Qualitative and Quantitative Research" children={
+                            <HideableComponent title="Business Problems" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>First what i did is prepare an interview question set for our current customers and structure how product team would consolidate the interview session for ESG Calculator. Also, a set of survey questions to follow up.  </ContentParagraph>
-                                    <ContentParagraph>Furthermore, I communicate closely with the sale team to tag along at their meeting of potential customers and observe the business nature. And whenever I got a chance, I politely ask for customer time and have them answer my survey questions. </ContentParagraph>
+                                    <ContentParagraph>From a business perspective, ESGpedia is currently facing a critical limitation:</ContentParagraph>
+                                    <ContentParagraph>While the platform successfully enabled ESG data collection, it lacked a mechanism to generate visible value from that data. This created several challenges: </ContentParagraph>
+                                    <div className="py-[64px]">
+                                        <img src={"/images/business-problem.png"} width={"100%"} />
+                                    </div>
+                                    <ContentParagraph>Without an analytics layer, ESGpedia could not fully close the loop between data collection and actionable insight. </ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
                                     <div className="mt-[-15px] float-right">
-                                        <QualityQuestionSetsComponent />
-                                        <QuantityQuestionSetsComponent />
+                                        <img src={"/images/business-problem-quote.png"} width={"725px"} />
                                     </div>
                                 } />
 
                             <ContentDivider />
-                            <HideableComponent title="Usability testing" children={
+                            <HideableComponent title="Product Strategy" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>After preparing the Qualitative and Quantitative question sets, we now have to learn the real pain points of our calculator by doing the usability testing.</ContentParagraph>
-                                    <ContentParagraph>Usability testing helps us observe how users actually interact with the ESG calculator — revealing hidden friction, confusion, or workflow issues that users might not articulate verbally.</ContentParagraph>
-                                    <ContentParagraph>Since the feature was already available in our live app, we conducted the usability test using the real product. Below is a sample of our initial (pre-revamp) version, only for case study viewers to have a glimpse. </ContentParagraph>
+                                    <ContentParagraph>Based on the identified business challenges, stakeholder input, and overall business objectives, below key principles were defined to guide the development of the Analytics Module:</ContentParagraph>
+                                    <div className="pt-[64px] pb-[40px]">
+                                        <img src={"/images/data-loop.png"} width={"100%"} />
+                                    </div>
+                                    <div className="pb-[40px]">
+                                        <img src={"/images/interpretation.png"} width={"100%"} />
+                                    </div>
+                                    <div>
+                                        <img src={"/images/esg-dimensions.png"} width={"100%"} />
+                                    </div>
                                 </div>
                             }
-                                fullWidhtChildren={
-                                    <div className="mt-[-15px]">
-                                        <div className="float-right">
-                                            <div className="w-[980px] h-[700px] bg-[#F4F4F4] p-[65px] rounded-[24px]">
-                                                <div className="w-[100%] h-[100%] border-[15px] rounded-[24px] border-black overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                                                    <img src={"/images/usability-website.png"} width={"100%"} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <ContentContainer py="80px">
-                                            <ContentParagraph><ContentParagraph>Below is the testing plan, we used along side the live usabilitiy testing session. Participants will perform key tasks using the real product to identify any usability issues, workflow friction, or unclear interfaces. </ContentParagraph></ContentParagraph>
-                                        </ContentContainer>
-                                        <div className="float-right">
-                                            <UsabilityTestingPlanComponent />
-                                        </div>
-
-                                    </div>
-                                } />
-
-                            <ContentDivider />
-                            <HideableComponent title="Diary Studies" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Since diary studies require consistent follow-ups, we anticipated that our clients—who already face the complex process of calculating ESG metrics—might find them intrusive or time-consuming.</ContentParagraph>
-                                    <ContentParagraph>To balance this, we decided to conduct the diary study internally by involving team members from different departments. This approach allows us to simulate real user scenarios, gather authentic insights, and test the process flow—without placing extra burden on our customers.</ContentParagraph>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right">
-                                        <StudyPlanComponent />
-                                    </div>
-
-                                } />
-
-                            <ContentDivider />
-                            <HideableComponent title="Microsoft Clarity as Validation layer" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>And lastly, to validate the usability findings from our qualitative studies, we used Microsoft Clarity to observe real user behavior within the live ESG Calculator. We mainly used Microsoft Clarity as a validation layer — to support and cross-check the insights gathered from our earlier research.</ContentParagraph>
-                                    <ContentParagraph>Our goal was to identify engagement trends, task duration, and potential drop-off points throughout the calculator flow. These insights helped confirm whether the usability issues reported by users were also reflected in their actual behavior on the platform.</ContentParagraph>
-                                    <p className="p-[10px] text-[16px] font-normal">
-                                        ''  By bridging what users said with what they actually did, we confirmed the
-                                        core usability pain points and ensured our next design decisions were
-                                        grounded in real user behavior ''
-                                    </p>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <img src={"/images/microsoft-clarity.png"} width={"800px"} />
-                                    </div>
-
-                                } />
-
-                            <ContentDivider />
-
-                            <ContentContainer isFull={true}>
-                                <ContentContainer py="0px">
-                                    <div className="flex gap-4 items-center">
-                                        <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                        <Title text="Conclusion of Research Findings" />
-                                    </div>
-
-                                    <ContentParagraph>To comprehensively assess the usability and effectiveness of the ESG Calculator, we triangulated user feedback, behavioral analytics, and real task performance across multiple research methods.</ContentParagraph>
-                                    <ContentParagraph>Our evaluation focused on two key dimensions — Usability Metrics, which measure how smoothly users interact with the tool, and Effectiveness Metrics, which reflect how well the product delivers value and drives impact for both users and the business.</ContentParagraph>
-                                </ContentContainer>
-                                <div className="mt-[15px] float-right">
-                                    <img src={"/images/usability-metrics.png"} width={"800px"} />
-                                </div>
-                                <ContentContainer py="60px">
-                                    <ContentParagraph>The 71% task completion shows it delivers core functionality, and users can eventually succeed (with help), which is a solid foundation for an ESG tool targeting non-experts like small suppliers.</ContentParagraph>
-                                    <ContentParagraph>Low SUS (59), high assistance (68%) and frustration (above 64%), plus 58%
-                                        drop-offs, indicate it's frustrating and inefficient. This could lead to low user engagement, higher support costs, increased errors (29%), and poor word-of-mouth among SMEs. At 36 minutes average time, it's not scalable for busy users.</ContentParagraph>
-                                </ContentContainer>
-                                <div className="mt-[15px] float-right">
-                                    <img src={"/images/impact-metrics.png"} width={"800px"} />
-                                </div>
-                                <ContentContainer py="60px">
-                                    <ContentParagraph>The business impact metrics reveal a tool with clear potential but critical trust and retention hurdles: only 58% of users trust the final output due to opaque formulas and input gaps, while 33% abandon the process—mostly at the complex Pillar 2 calculations.</ContentParagraph>
-                                    <ContentParagraph>Framework clarity stands at just 42%, with existing tooltips and examples failing to help, dragging average satisfaction to 55% amid perceptions of complexity and time burden. Yet, a strong 68% of users express intent to return if efficiency, automation, and clarity are meaningfully improved—signaling that while the feature currently undermines confidence and completion, targeted fixes could unlock high reuse and long-term business value.</ContentParagraph>
-                                </ContentContainer>
-                            </ContentContainer>
+                            />
                             <ContentContainer py={"0px"} isFull={true}>
                                 <ContentDivider isFull={true} />
                             </ContentContainer>
@@ -430,178 +326,119 @@ hot spots of emissions in our supply chain. ...”"
                     <ContentSectionWrapper>
                         <div ref={(nav) => { if (nav) { navRefs.current[3] = nav } }}>
                             <ContentContainer>
-                                <Title text="Problem Define" />
-                                <ContentParagraph>After gathering insights, we synthesized what we learned. This section shows how scattered findings were transformed into clear problem statements using user personas, stories, affinity mapping, empathy maps, and customer journey mapping. It highlights the key usability, trust, and retention challenges that mattered most to both users and the business.</ContentParagraph>
+                                <Title text="Discovery & Product Definition" />
+                                <ContentParagraph>The project followed an iterative design approach across the full product lifecycle, from understanding business goals and user needs to research, ideation, and solution design. Insights were translated into prototypes and refined through continuous validation and collaboration, ensuring the final experience balanced user engagement, usability, and business objectives.</ContentParagraph>
                             </ContentContainer>
                             <ContentDivider />
-                            <HideableComponent title="User Story"
+                            <HideableComponent title="Understanding the Existing System"
                                 children={
                                     <div className="pt-[40px]">
-                                        <ContentParagraph>Managing ESG data is complex—even for small companies. Tracking electricity, water, waste, and emissions within a single organization is already challenging. That complexity multiplies for large companies that rely on hundreds of suppliers.</ContentParagraph>
-                                        <div>
-                                            <img src={"/images/user-story-relation.png"} />
-                                        </div>
-                                        <ContentParagraph>Many local suppliers and SMEs are unfamiliar with ESG reporting altogether and often track data in inconsistent ways—across spreadsheets, different formats, or even paper records. As a result, collecting and verifying data becomes slow and error-prone, with progress stalled by endless email follow-ups and manual clarification.</ContentParagraph>
-                                    </div>
-                                }
-                                fullWidhtChildren={
-                                    <div className="mt-[-15px] float-right">
-                                        <img src={'/images/user-story-explain.png'} />
-                                    </div>
-                                }
-                            />
-
-                            <ContentDivider />
-                            <HideableComponent title="User Persona"
-                                children={
-                                    <div className="pt-[40px]">
-                                        <ContentParagraph>We didn't guess who our users were—we already knew two of them.</ContentParagraph>
-                                        <ContentParagraph>ShengSiong and Razer both are our real customers and we met with their sustainability manager occasionally. We thought using them as our persona will greatly enhance our understanding of them and help validate their problems.</ContentParagraph>
-
-                                    </div>
-                                }
-                                fullWidhtChildren={
-                                    <div className="mt-[-15px] float-right">
-                                        <PersonaOneComponent />
-                                        <PersonaTwoComponent />
-                                        <ContentContainer py="60px">
-                                            <ContentParagraph>These personas helped us design with empathy and clarity. Instead of assuming all companies use ESG tools the same way, we could tailor our decisions to real needs — whether that meant simplifying the data input journey for beginners or optimizing framework mapping for advanced users. This approach ensured our redesign was grounded in real-world challenges, not just assumptions.</ContentParagraph>
-                                        </ContentContainer>
-
-                                    </div>
-                                }
-                            />
-
-                            <ContentDivider />
-                            <HideableComponent title="Affinity Mapping"
-                                children={
-                                    <div className="pt-[40px]">
-                                        <ContentParagraph>After gathering a lot of research data and behavioral insights, we needed a structured way to make sense of it all. Affinity mapping was the perfect starting point for synthesis.</ContentParagraph>
-                                        <ContentParagraph>In the first step, we placed every data point, quote, behavior, and metric as individual sticky notes without judging or filtering them.</ContentParagraph>
-                                        <ContentParagraph>Color code by research method:</ContentParagraph>
-                                        <ContentParagraph>🟪 Qualitative | 🟥 Survey | 🟦 Usability | 🟨 Diary | 🟩 Clarity</ContentParagraph>
-                                    </div>
-                                }
-                                fullWidhtChildren={
-                                    <div className="mt-[-15px]">
-                                        <div className="float-right">
-                                            <AffinityMapOneComponent />
-                                        </div>
-
-                                        <ContentContainer py="60px">
-                                            <ContentParagraph>Then as a Step 2, we categorize the data by identifying patterns and similarities through iterative sorting, grouping related notes, across our diverse users, from beginner SMEs to advanced enterprises like Sheng Siong and Razer.</ContentParagraph>
-                                            <ContentParagraph>The six main categories were emerged.</ContentParagraph>
-                                            <div className="py-[20px]">
-                                                <p>"</p>
-                                                <div className="pl-[10px]">
-                                                    <p className="leading-9">
-                                                        a. Data accuracy, format and input frictions. <br />
-                                                        b. Barriers Related to Terminology and Trust <br />
-                                                        c. UI Challenges: Visual Hierarchy and Information Overload <br />
-                                                        d. UX Challenges: Learning Curve, Onboarding Gaps, and Time Efficiency  <br />
-                                                        e. Guidance, Help Resources, or Integrated Assistance <br />
-                                                        f.  Suggestions for New Features or Direct User Requests &nbsp; &nbsp; "
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <ContentParagraph>Once clear themes emerged, we moved into Step 3 — conducting a dot-voting exercise with the team to identify which clusters represented the most critical user problems. This allowed us to prioritize the issues with the highest impact and frequency, ensuring that our efforts focused on what truly mattered to both users and the business.</ContentParagraph>
-                                        </ContentContainer>
-
-                                        <div className="mt-[-15px] float-right">
-                                            <AffinityMapTwoComponent />
-                                        </div>
-
-                                    </div>
-                                }
-                            />
-
-                            <ContentDivider />
-                            <HideableComponent title="Empathy Map"
-                                children={
-                                    <div className="pt-[40px]">
-                                        <ContentParagraph>Empathy mapping is a pivotal tool in human-centered design, particularly for complex domains like ESG reporting, where users range from novice SMEs to seasoned enterprises. This tool bridged raw data from affinity clusters (e.g., data friction, framework confusion) to a deeper understanding of what user struggles. </ContentParagraph>
-                                        <ContentParagraph>To populate the empathy map quadrants, we drew directly from triangulated research data, starting with affinity-mapped notes which are already categorized. </ContentParagraph>
-                                        <div className="flex gap-3 items-start pt-[10px]">
-                                            <img src={"/images/ear.png"} width={"20px"} height={"25px"} />
-                                            <ContentParagraph>
-                                                <span className="text-black">What user "Hears"</span> - captured external influences like stakeholder demands for reliable data (e.g., only 27.3% gathered on time) and feedback on framework mismatches.
-                                            </ContentParagraph>
-                                        </div>
-                                        <div className="flex gap-3 items-start pt-[10px]">
-                                            <img src={"/images/eye.png"} width={"20px"} height={"25px"} />
-                                            <ContentParagraph>
-                                                <span className="text-black">What user "Sees"</span> - focused on observed behaviors via Clarity heatmaps and session recordings, such as rage clicks on help icons (64% frustration during uploads) and low scroll depth (58% drop-offs in Scope 2).
-                                            </ContentParagraph>
-                                        </div>
-                                        <div className="flex gap-3 items-start pt-[10px]">
-                                            <img src={"/images/brain.png"} width={"20px"} height={"25px"} />
-                                            <ContentParagraph>
-                                                <span className="text-black">What user "Thinks & Feels"</span> - delved into internal states, inferring anxiety from low confidence scores (58%) and overwhelm from diary entries about supplier verification.
-                                            </ContentParagraph>
-                                        </div>
-                                        <div className="flex gap-3 items-start pt-[10px]">
-                                            <img src={"/images/touch.png"} width={"20px"} height={"25px"} />
-                                            <ContentParagraph>
-                                                <span className="text-black">What user "Says & Does"</span> - compiled verbatim quotes and actions from interviews/usability tests, like "I need examples for Scope 3" or backtracking during inputs (29% error rate).
-                                            </ContentParagraph>
+                                        <ContentParagraph>I started by analyzing how ESG data was currently structured and used within ESGpedia. The platform already supported data collection across multiple ESG dimensions, including emissions (Scope 1, 2, 3), workforce metrics, and governance indicators. This data was collected through assessments and calculators, resulting in a wide range of structured inputs.</ContentParagraph>
+                                        <ContentParagraph>However, the system was primarily designed for data entry and storage, not for interpretation.</ContentParagraph>
+                                        <div className="pt-[64px]">
+                                            <p className={`text-[${Colors.title}] text-[${FontSizes.medium}] font-bold`}>Key observations :</p>
                                         </div>
                                     </div>
                                 }
                                 fullWidhtChildren={
                                     <div className="mt-[-15px] float-right">
                                         <div className="float-right">
-                                            <EmpathyMapComponent />
+                                            <img src={'/images/key-observations.png'} width={"874px"} />
                                         </div>
-
                                         <ContentContainer py="60px">
-                                            <ContentParagraph>Once the empathy map was complete, we synthesized recurring patterns across all quadrants to identify: Pains and Gains.</ContentParagraph>
-                                            <div className="flex gap-3 items-start pt-[10px]">
-                                                <img src={"/images/pains.png"} width={"20px"} height={"25px"} />
-                                                <ContentParagraph>
-                                                    <span className="text-black">Pains</span> - distilled frustrations (e.g., learning curves, 33% abandonment) and drove simplifications (tooltips, auto-conversions cutting errors, etc).
-                                                </ContentParagraph>
-                                            </div>
-                                            <div className="flex gap-3 items-start pt-[10px]">
-                                                <img src={"/images/gains.png"} width={"20px"} height={"25px"} />
-                                                <ContentParagraph>
-                                                    <span className="text-black">Gains</span> - inspired features (bulk imports, progress trackers), reducing drop-offs, boosting trust, and enabling scalable ESG compliance for stakeholders.
-                                                </ContentParagraph>
-                                            </div>
+                                            <ContentParagraph>As a result, while the platform successfully captured ESG data, it did not support users in understanding or acting on it. This analysis revealed a critical gap: </ContentParagraph>
                                         </ContentContainer>
                                         <div className="float-right">
-                                            <PainGainComponent />
+                                            <img src={'/images/key-observations-quote.png'} width={"725px"} />
                                         </div>
                                     </div>
                                 }
                             />
 
                             <ContentDivider />
-                            <HideableComponent title="Customer Journey"
+                            <HideableComponent title="Identifying User Workflow Gaps"
                                 children={
                                     <div className="pt-[40px]">
-                                        <ContentParagraph>Customer journey mapping allowed us to deeply understand how sustainability managers and SMEs navigate the our Calculator. ESG workflows are inherently fragmented and data-heavy, visualizing the entire journey helped us see not just what users do, but where emotions shift, where confusion builds, and where friction accumulates across different touchpoints. </ContentParagraph>
-                                        <ContentParagraph>The journey map became the bridge between raw research and actionable design decisions, giving us a holistic view of users’ real challenges across phases of the ESG reporting cycle.</ContentParagraph>
+                                        <ContentParagraph>After understanding how the system stored ESG data, I mapped the end-to-end user workflow from data input to reporting.The typical flow was:</ContentParagraph>
+                                        <ContentParagraph>Data Input → Data Storage → (No clear next step)</ContentParagraph>
+                                        <div className="py-[48px]">
+                                            <img src={"/images/workflow-gaps.png"} width={"100%"} />
+                                        </div>
 
+                                        <ContentParagraph>While users could successfully submit ESG data through assessments and calculators, the workflow effectively ended there. There was no structured way to interpret or act on the data after submission. This created several key gaps:</ContentParagraph>
                                     </div>
                                 }
                                 fullWidhtChildren={
                                     <div className="mt-[-15px] float-right">
-                                        <JourneyMapComponent />
+                                        <img className="pb-[48px]" src={"/images/workflow-gaps-points.png"} width={"787px"} />
+                                        <div className="float-right">
+                                            <img src={"/images/workflow-gaps-quote.png"} width={"725px"} />
+                                        </div>
 
                                     </div>
                                 }
                             />
-                            <ContentDivider />
-                            <ContentContainer py="60px">
-                                <div className="flex gap-4 items-center">
-                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                    <Title text="Conclusion of Problem Define or HMWs" />
-                                </div>
 
-                                <ContentParagraph>After all methods of above, we can say now that we know our customer along with their pain points throughout the whole journey. Before turning those pain points into business opportunities, we need to loudly address the brutal honest weak points or problems our current application is having. </ContentParagraph>
-                                <ContentParagraph>This is where HMW method is used. We translated key pain points and opportunities identified in the customer journey into focused “How Might We” questions to guide solution ideation.</ContentParagraph>
-                            </ContentContainer>
+                            <ContentDivider />
+                            <HideableComponent title="Understanding the ESG Domain"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>To design an effective analytics system, it was important to understand how ESG data is structured and interpreted in real-world reporting contexts. ESG data is inherently multi-dimensional and follows established frameworks:</ContentParagraph>
+                                        <div className="pt-[48px] pb-[16px]">
+                                            <img src={"/images/environmental.png"} width={"100%"} />
+                                        </div>
+                                        <div className="pb-[16px]">
+                                            <img src={"/images/social.png"} width={"100%"} />
+                                        </div>
+                                        <div className="pb-[48px]">
+                                            <img src={"/images/governance.png"} width={"100%"} />
+                                        </div>
+                                        <ContentParagraph>Among these, Scope 3 emissions present a unique challenge due to their complexity. They span multiple indirect categories across upstream and downstream activities, making them difficult to aggregate and analyze.</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="">
+                                        <div className="float-right">
+                                            <img src={"/images/esg-domain-points.png"} width={"783px"} />
+                                        </div>
+
+                                        <div className="float-right pt-[64px]">
+                                            <img src={"/images/esg-domain-quote.png"} width={"725px"} />
+                                        </div>
+
+                                        <ContentContainer py="60px" pb="0px">
+                                            <ContentParagraph>This understanding directly informed the design of the module’s structure, ensuring alignment with how organizations measure, report, and act on ESG performance.</ContentParagraph>
+                                        </ContentContainer>
+                                    </div>
+                                }
+                            />
+
+                            <ContentDivider />
+                            <HideableComponent title="Structuring the Data for Insight"
+                                children={
+                                    <div className="pt-[40px]">
+                                        <ContentParagraph>Based on the system analysis, workflow gaps, and ESG domain constraints, the key challenge was to transform fragmented and complex datasets into a structure that supports clear interpretation. Rather than treating analytics as a collection of charts, I focused on defining a repeatable data structure that could be applied across all ESG dimensions.</ContentParagraph>
+                                        <ContentParagraph>And thus, the solution was built on four layers:</ContentParagraph>
+                                    </div>
+                                }
+                                fullWidhtChildren={
+                                    <div className="">
+                                        <div className="float-right">
+                                            <img src={"/images/data-insight-points.png"} width={"783px"} />
+                                        </div>
+                                        <ContentContainer py="60px" pb="0px">
+                                            <ContentParagraph>This layered approach creates a clear path from <span className="text-black font-[610]">overview → insight → investigation</span>, enabling users to progressively explore data without feeling overwhelmed.</ContentParagraph>
+                                            <ContentParagraph>Importantly, this structure was applied consistently across:</ContentParagraph>
+                                            <ContentList lineHeight="5px">Environmental data (Scope 1, 2, 3)</ContentList>
+                                            <ContentList lineHeight="5px">Social metrics (workforce, training, safety)</ContentList>
+                                            <ContentList lineHeight="5px">Governance indicators (compliance, board structure)</ContentList>
+                                        </ContentContainer>
+                                        <div className="float-right pt-[64px]">
+                                            <img src={"/images/data-insight-quote.png"} width={"725px"} />
+                                        </div>
+                                    </div>
+                                }
+                            />
                             <ContentContainer py={"0px"} isFull={true}>
                                 <ContentDivider isFull={true} />
                             </ContentContainer>
@@ -611,132 +448,81 @@ hot spots of emissions in our supply chain. ...”"
                     <ContentSectionWrapper>
                         <div ref={(nav) => { if (nav) { navRefs.current[4] = nav } }}>
                             <ContentContainer>
-                                <Title text="Ideation" />
-                                <ContentParagraph>Once the problems were clearly defined, we shifted into exploration. This section walks through how we reframed challenges into opportunities using How Might We (HMW) statements, prioritized ideas, and explored multiple solution directions before converging on the most impactful concepts.</ContentParagraph>
+                                <Title text="Final Solutions" />
+                                <ContentParagraph>Here, the story comes to life. This section presents the redesigned ESG Calculator experience, explaining how each design decision addressed the core problems. It showcases improvements across onboarding, data input, framework clarity, and feedback—connecting solutions directly back to user and business needs.</ContentParagraph>
                             </ContentContainer>
                             <ContentDivider />
 
-                            <HideableComponent title="Prioritising the Problems" children={
+                            <HideableComponent title="A Unified ESG Analytics System" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>According to previous sections, we have 25 problems to solve to achieve our business goals. We need to align with our stakeholders to fully understand that our solutions are feasible and how much time and effort needed to tackle this improvements effectively. So that, our teams could build the right features at right time and avoid feature creep.</ContentParagraph>
-                                    <ContentParagraph>So, I initially thought there were many methods to prioritize the features but later I found out that MOSCOW Method was the most relevant method for us.</ContentParagraph>
-                                    <div className="flex gap-3 items-start pt-[10px]">
-                                        <img src={"/images/cross.png"} width={"22px"} height={"26px"} />
-                                        <ContentParagraph>
-                                            <span className="text-black">RICE Method</span> - the first downside is we need to collect data again and also this method relies heavily on guessing which would result on assumptions again. Honestly, we don’t want to go back to research and guessing again in this later stage.
-                                        </ContentParagraph>
-                                    </div>
-                                    <div className="flex gap-3 items-start pt-[10px]">
-                                        <img src={"/images/cross.png"} width={"22px"} height={"26px"} />
-                                        <ContentParagraph>
-                                            <span className="text-black">Impact-Effort</span> - this looks pretty simple and useful method at first but then later we realized that we need to develop the features when our client Razer or Shengsiong requests when even if this method is suggesting it is low impact or high effort.
-                                        </ContentParagraph>
-                                    </div>
-                                    <div className="flex gap-3 items-start pt-[10px]">
-                                        <img src={"/images/tick.png"} width={"22px"} height={"26px"} />
-                                        <div>
-                                            <ContentParagraph>
-                                                <span className="text-black">MOSCOW Method</span> - becomes the most convenient method for us. We used this method not only with our internal stakeholders but also with our precious clients to clear next milestones in our project with categorizing of MUST HAVE, SHOULD HAVE, COULD HAVE and WILL NOT HAVE.
-                                            </ContentParagraph>
-                                            <ContentParagraph>This method not only clear our next steps but also helps a lot in aligning with our development team regarding our roadmap and timelines.</ContentParagraph>
-                                        </div>
-
-                                    </div>
+                                    <ContentParagraph>To address the gaps in interpretation and decision-making, I designed the Analytics Module as a unified system that transforms raw ESG data into structured insights. The solution is built around:</ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <MoscowMethodComponent />
+                                    <div className=" float-right  mb-[45px]">
+                                        <img src={"/images/aligned-architecture.png"} width={"811px"} />
                                     </div>
 
                                 } />
                             <ContentDivider />
 
-                            <HideableComponent title="Brainstorming and Low fidelity Wireframe " children={
+                            <HideableComponent title="Environmental Analytics (Scope 1, 2, 3)" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>Once the key problems were prioritized, we moved quickly into solution ideation. Given time constraints, we intentionally avoided broad, time-heavy ideation methods like SCAMPER or Crazy 8s, and instead <span className="text-black">adopted a lean, decision-driven approach.</span></ContentParagraph>
-                                    <ContentParagraph>① Our core group—VP of Product, Product Manager, Product Owner, and a technical counterpart—worked together to evaluate each “How Might We” problem.</ContentParagraph>
-                                    <ContentParagraph>② As a product designer, I framed the user context and pain points, the team generated a small set of solution options, and we rapidly converged on one or two viable directions. </ContentParagraph>
-                                    <ContentParagraph>③ I then sketched these ideas in real time to make them tangible.</ContentParagraph>
-
+                                    <ContentParagraph>Environmental data is structured around Scope 1, 2, and 3 emissions:</ContentParagraph>
+                                    <div className="py-[20px]">
+                                        <ContentParagraph lineHeight="5px">- Scope 1 → direct emissions</ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Scope 2 → indirect energy emissions </ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Scope 3 → value chain emissions </ContentParagraph>
+                                    </div>
+                                    <ContentParagraph>To handle complexity, Scope 3 is further divided into upstream and downstream categories, allowing users to identify the largest emission drivers and focus on high-impact areas. This transforms a traditionally complex dataset into a navigable and actionable system.</ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
                                     <div className="mt-[15px] float-right  mb-[45px]">
-                                        <SliderFrameComponent width="900px" title="Brainstorm sketches" numOfSlides="15">
-                                            {
-                                                new Array(15).fill(null).map((v, i) => {
-                                                    return <div><img src={`/images/bss-${i + 1}.png`} width={"100%"} /></div>
-                                                }
-                                                )
-                                            }
-                                        </SliderFrameComponent>
-                                        <ContentContainer>
-                                            <ContentParagraph>
-                                                These quick sketches played a critical role in bridging conversation and execution. By visualizing ideas immediately, we turned abstract discussions into something concrete the entire team could react to, challenge, and align on.<span className="text-black">From verbal ideation to visual thinking</span> , and <span className="text-black">from exploration to execution—</span>setting a strong, practical baseline for the solutions.
-                                            </ContentParagraph>
-                                        </ContentContainer>
+                                        <img src={"/images/rect-skeleton.png"} width={"941px"} />
                                     </div>
 
 
                                 } />
                             <ContentDivider />
 
-                            <HideableComponent title="Sitemap (Content-centered Approach)" children={
+                            <HideableComponent title="Social Analytics" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>Initially, we assumed a sitemap wasn’t necessary because the team was familiar with the product. However, as we began addressing deeper structural problems, it became clear that skipping this step was a mistake. We quickly realized that without a clear, shared view of the existing information architecture, solving complexity at the feature level would remain fragmented.</ContentParagraph>
-                                    <ContentParagraph>This exercise gave us a clear structural baseline, enabling more intentional ideation, cleaner feature placement, and a more scalable foundation for future growth.</ContentParagraph>
+                                    <ContentParagraph>The Social module provides visibility into workforce-related metrics:</ContentParagraph>
+                                    <div className="py-[20px]">
+                                        <ContentParagraph lineHeight="5px">- Diversity (age, gender distribution)</ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Employment trends </ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Training and development</ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Occupational health and safety</ContentParagraph>
+                                    </div>
+                                    <ContentParagraph>These insights help organizations monitor workforce well-being and align with ESG reporting requirements.</ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
                                     <div className="mt-[15px] float-right  mb-[45px]">
-                                        <RevampedSitemapComponent />
+                                        <img src={"/images/rect-skeleton.png"} width={"941px"} />
                                     </div>
 
                                 } />
                             <ContentDivider />
 
-                            <HideableComponent title="Product Roadmap" children={
+                            <HideableComponent title="Governance Analytics" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph><span className="text-black">Rather than delivering everything in a single, high-risk release, we chose a phased approach</span> that allows the team to ship value gradually, manage complexity, and align more closely with client expectations.</ContentParagraph>
-                                    <ContentParagraph>To support this approach, we evaluated available resources and timelines to ensure each phase could be delivered efficiently without compromising quality. </ContentParagraph>
-                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Preparation focuses on building a strong foundation and essential setup.</ContentParagraph>
-                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Core Functionality, rolling out most of the Must-have and Should-have features. </ContentParagraph>
-                                    <ContentParagraph><span className="text-black">Phase 1 </span>– Refinement centers on optimization and polish, implementing <span className="text-black">Could-have</span> enhancements.</ContentParagraph>
+                                    <ContentParagraph>Governance analytics focus on transparency and compliance:</ContentParagraph>
+                                    <div className="py-[20px]">
+                                        <ContentParagraph lineHeight="5px">- Board composition and diversity</ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Anti-corruption measures </ContentParagraph>
+                                        <ContentParagraph lineHeight="5px">- Training and compliance tracking </ContentParagraph>
+                                    </div>
+                                    <ContentParagraph>This provides organizations with a clear view of governance structures and risk areas.</ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
                                     <div className="mt-[15px] float-right  mb-[45px]">
-                                        <ProductRoadmapComponent />
+                                        <img src={"/images/rect-skeleton.png"} width={"941px"} />
                                     </div>
 
                                 } />
-                            <ContentDivider />
-
-                            <HideableComponent title="UI Elements" children={
-                                <div>
-
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <div className="pb-[30px]"><img src={"/images/uie-1.png"} width={"800px"} /></div>
-                                        <div className="pb-[30px]"><img src={"/images/uie-2.png"} width={"800px"} /></div>
-                                        <div className="pb-[30px]"><img src={"/images/uie-3.png"} width={"800px"} /></div>
-                                        <div className="pb-[30px]"><img src={"/images/uie-4.png"} width={"800px"} /></div>
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-                            <ContentContainer>
-                                <div className="flex gap-4 items-center">
-                                    <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                    <Title text="Conclusion of Ideation" />
-                                </div>
-
-                                <ContentParagraph>With problems clearly defined and solutions prioritized, the ideation phase moved from exploration into alignment. Through structured brainstorming, wireframing, sitemap refinement, and roadmap planning, we translated abstract ideas into clear, intentional decisions.</ContentParagraph>
-                                <ContentParagraph>This section includes low-fidelity wireframes, site map and timeline  — not as visual polish, but as a shared blueprint. They represent our collective understanding of the problem space, the priorities we committed to, and the direction we were confident enough to move forward with before investing in high-fidelity design.</ContentParagraph>
-                            </ContentContainer>
                         </div>
                         <ContentContainer py={"0px"} isFull={true}>
                             <ContentDivider isFull={true} />
@@ -746,201 +532,24 @@ hot spots of emissions in our supply chain. ...”"
                     <ContentSectionWrapper>
                         <div ref={(nav) => { if (nav) { navRefs.current[5] = nav } }}>
                             <ContentContainer>
-                                <Title text="Final Solution" />
-                                <ContentParagraph>Here, the story comes to life. This section presents the redesigned ESG Calculator experience, explaining how each design decision addressed the core problems. It showcases improvements across onboarding, data input, framework clarity, and feedback—connecting solutions directly back to user and business needs.</ContentParagraph>
+                                <Title text="Impact" />
+                                <ContentParagraph>The effectiveness of the Analytics Module is reflected in strong client adoption. Following its introduction, ESGpedia successfully onboarded major clients including Razer, Kimly Construction, Ngai Chin, Soilbuild Construction, and Hi-Tek Construction.</ContentParagraph>
+                                <ContentParagraph>This demonstrates the importance of analytics in delivering tangible value, supporting user engagement, and strengthening the platform’s positioning in the ESG market.</ContentParagraph>
                             </ContentContainer>
                             <ContentDivider />
 
-                            <HideableComponent title="Phase 1 - Preparation" children={
+                            <HideableComponent title="Projected Impact & Business Outcomes" children={
                                 <div className="pt-[40px]">
-                                    <ContentParagraph>This phase focuses on establishing a strong foundation by introducing core preparation steps, data prerequisites, and critical configuration settings. Based on the feature prioritization, selected must-have and key should-have features are included in this phase to eliminate early friction and set users up for success.</ContentParagraph>
-                                    <ContentParagraph>This phase covers —</ContentParagraph>
-                                    <ContentParagraph>
-                                        ① framework selection,
-                                        <br />
-                                        ② preparation steps 1–3,
-                                        <br />
-                                        ③ the product tour, and
-                                        <br />
-                                        ④ the core assessment structure, including
-                                        <br />
-                                        ⑤ the main screen and sidebar hierarchy.
-                                    </ContentParagraph>
+                                    <ContentParagraph>As a newly introduced feature, the Analytics Module is expected to deliver measurable improvements in both user engagement and business value.</ContentParagraph>
+                                    <ContentParagraph>Projected impact includes:</ContentParagraph>
                                 </div>
                             }
                                 fullWidhtChildren={
                                     <div className="mt-[15px] float-right  mb-[45px]">
-                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="6">
-                                            <HmwSoltuionComponent
-                                                problem="How might we provide guided framework selection with previews to boost initial confidence and prevent early confusion?"
-                                                solution="Clearly separated tools and standards during framework selection, using distinct labels, logos, and descriptions to help users understand their purpose and choose confidently."
-                                                video="/images/solution-1-1.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we use progressive disclosure to reduce overwhelm when users input data for multiple assets?"
-                                                solution="Added an upfront asset setup step and surfaced assets in the sidebar, allowing users to focus on one asset at a time, progressively reveal related inputs, and still edit asset details at any stage."
-                                                video="/images/solution-1-2.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we accurately calculate emissions based on an organization’s percentage of ownership or responsibility?"
-                                                solution="Added an upfront ownership step as preparation Step 3 to calculate emissions based each organization’s share."
-                                                video="/images/solution-1-3.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we reduce the learning curve and help users quickly reorient themselves when returning to the tool? "
-                                                solution="Implemented a contextual product tour for new and returning users to accelerate onboarding, reduce relearning effort, and increase successful assessment completion."
-                                                video="/images/solution-1-4.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we make the reporting year and ownership percentage clearly visible and easy to edit at any point in the assessment flow?"
-                                                solution="Placed reporting year and ownership percentage as always-visible controls in the top bar, allowing users to review and edit them at any point in the assessment."
-                                                video="/images/solution-1-5.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we simplify the sections so that user could see it as a simple journey or divide the big section into smaller chunk and don’t miss Social and Governance sections?"
-                                                solution="Reorganized the assessment into a four-level structure, Asset → ESG pillar → Category → Detailed inputs — with the first three levels visible in the sidebar and detailed sections shown in the main view."
-                                                video="/images/solution-1-6.mp4"
-                                            />
-                                        </SliderFrameComponent>
+                                        <img src={"/images/projected-impact.png"} width={"876px"} />
                                     </div>
 
                                 } />
-                            <ContentDivider />
-
-                            <HideableComponent title="Phase 2 - MVP" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>This phase delivers the core Environmental calculation experience that users can complete end-to-end with confidence. It includes selected should-have and could-have features that improve accuracy, reduce friction, and strengthen trust in the results.</ContentParagraph>
-                                    <ContentParagraph>This phase covers —</ContentParagraph>
-                                    <ContentParagraph>
-                                        ① unit conversion and data upload,
-                                        <br />
-                                        ② Scope 1–3 calculations,
-                                        <br />
-                                        ③ section summaries, and
-                                        <br />
-                                        ④ emission removal.
-                                    </ContentParagraph>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="5">
-                                            <HmwSoltuionComponent
-                                                problem="How might we add built-in unit conversion across Scope 1–3 and renewable energy inputs to reduce errors and user frustration from unit mismatches?"
-                                                solution="Embedded unit conversion directly within input fields and data entry modals, allowing users to switch units easily and prevent mismatches across Scope 1–3 and other inputs"
-                                                video="/images/solution-2-1.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we differentiate Scope 2 electricity into market-based and location-based inputs so users can accurately reflect green electricity purchases?"
-                                                solution="Split Scope 2 electricity into separate market-based and location-based sections, allowing users to input green electricity certificates and see their adjusted emissions results."
-                                                video="/images/solution-2-2.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we support all Scope 3 categories so users can accurately calculate and report their full Scope 3 emissions?"
-                                                solution="Supported full Scope 3 reporting by surfacing all 15 categories and enabling direct data import from the dedicated Scope 3 calculator, while still allowing manual input for flexibility."
-                                                video="/images/solution-2-3.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we create a clear, relatable assessment journey with saved progress and section summaries that encourage users to continue and return?"
-                                                solution="Added a section summary as the final step to reinforce progress and outcomes, while placing Save, Submit, and Cancel actions consistently at the bottom of the flow."
-                                                video="/images/solution-2-4.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we support emission removals so certified activities can be accurately reflected in emissions calculations?"
-                                                solution="Enabled emission removals to be applied in the final summary, allowing certified activities to be  reflected immediately in the overall emissions results."
-                                                video="/images/solution-2-5.mp4"
-                                            />
-                                        </SliderFrameComponent>
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="Phase 3 - Efficiency" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>The final phase focuses on refinement, efficiency, and long-term adoption with Advanced conveniences, and experience enhancements are added. As per feature prioritiztion, we will have most of could have features will be put here.</ContentParagraph>
-                                    <ContentParagraph>This phase covers —</ContentParagraph>
-                                    <ContentParagraph>
-                                        ① feedback form
-                                        <br />
-                                        ② data import feature,
-                                        <br />
-                                        ③ Upload modal with previous-year data,
-                                        <br />
-                                        ④ improved terminology and formula breakdowns and
-                                        <br />
-                                        ⑤ refined Social and Governance structure.
-                                    </ContentParagraph>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <SliderFrameComponent title="Solution" width="900px" numOfSlides="5">
-                                            <HmwSoltuionComponent
-                                                problem="How might we make feedback easily accessible throughout the journey so users can share input at the right moment?"
-                                                solution="Made feedback accessible throughout the flow by placing a persistent feedback button at the bottom of the interface, allowing users to share input at the moment issues arise."
-                                                video="/images/solution-3-1.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we support data import (e.g., CSV) across different sections to reduce manual input effort and speed up assessment completion?"
-                                                solution="Enabled scope-based data import by adding dedicated import actions for each scope. Users can upload CSV files via a guided modal with downloadable templates."
-                                                video="/images/solution-3-2.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we reduce frustration during file uploads and dropdown selections while allowing users to reference previous-year data to build confidence?"
-                                                solution="Structured dropdowns to align with calculation logic and introduced a dedicated upload modal that displays previous-year data, reducing friction and improving user confidence."
-                                                video="/images/solution-3-3.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we improve terminology clarity for users of all experience levels while providing transparent formula breakdowns to build trust and reduce anxiety?"
-                                                solution="Standardized terminology through research-led language choices and added contextual tooltips with formula breakdowns, helping users of all experience understand calculations and trust the results."
-                                                video="/images/solution-3-4.mp4"
-                                            />
-                                            <HmwSoltuionComponent
-                                                problem="How might we simplify the Social and Governance sections using collapsible sub-sections to reduce endless scrolling and user fatigue?"
-                                                solution="By using collapsible sub-sections, users can see all required disclosures at a glance while focusing on one section at a time, reducing scrolling, cognitive load, and overall reporting fatigue."
-                                                video="/images/solution-3-5.mp4"
-                                            />
-                                        </SliderFrameComponent>
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-                            <ContentContainer isFull={true}>
-                                <ContentContainer py="0px">
-                                    <div className="flex gap-4 items-center">
-                                        <img src={"/images/multi-star.png"} width={"24px"} height={"24px"} className="mt-[-30px]" />
-                                        <Title text="Conclusion of Final Solution" />
-                                    </div>
-
-                                    <ContentParagraph>These solutions addressed the key barriers that were limiting the ESG Calculator’s commercial success — high user friction, low confidence in results, and inconsistent completion. By simplifying complex workflows and improving transparency around data and frameworks, the product became easier to use, easier to trust, and easier to adopt.</ContentParagraph>
-                                    <ContentParagraph>As a result, the redesigned experience not only improved user efficiency and confidence, but also strengthened the product’s market readiness, reduced operational support burden, and positioned the ESG Calculator as a more scalable and revenue-driving offering.</ContentParagraph>
-                                </ContentContainer>
-                                <div className="float-right">
-                                    {/* <div className="w-[800px] bg-[#F4F4F4] rounded-[32px] mb-[25px] p-[16px] flex justify-between items-center">
-                                        <div className="w-[30%]">
-                                            <div className="bg-white rounded-[24px] items-center justify-center flex h-[126px] w-[156px]">
-                                                <img src={"/images/figma.png"} width={"64px"} />
-                                            </div>
-
-                                        </div>
-                                        <div className="w-[70%] h-[100%] rounded-[24px] p-[20px]">
-                                            <div className="flex justify-between items-center">
-                                                <h2 className={`text-[${Colors.title}] text-[${FontSizes.medium}] pb-[5px]`}>Figma Prototype</h2>
-                                                <div className="bg-white rounded-full w-[55px] h-[55px] flex justify-center items-center cursor-pointer" >
-                                                    <img src={"/images/arrow-outward.png"} />
-                                                </div>
-                                            </div>
-                                            <div className="w-[85%]">
-                                                <ContentParagraph>To experience the full revamp journey in detail, explore the  Figma files here.</ContentParagraph>
-                                            </div>
-
-
-                                        </div>
-                                    </div> */}
-                                </div>
-
-                            </ContentContainer>
                         </div>
                         <ContentContainer py={"0px"} isFull={true}>
                             <ContentDivider isFull={true} />
@@ -949,211 +558,20 @@ hot spots of emissions in our supply chain. ...”"
 
                     <ContentSectionWrapper>
                         <div ref={(nav) => { if (nav) { navRefs.current[6] = nav } }}>
-                            <ContentContainer>
-                                <Title text="Challenge" />
-                                <ContentParagraph>Every project has its obstacles. This section reflects on the complexities of designing for ESG—balancing regulatory accuracy, diverse user maturity levels, and evolving business requirements—while aligning multiple stakeholders around a shared vision.</ContentParagraph>
-                            </ContentContainer>
-                            <ContentDivider />
-
-                            <HideableComponent title="Ownership and Accountability" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Beyond designing interfaces, I was responsible for aligning multiple stakeholders including clients, developers, and internal leads. the challenge was not a lack of input, but the responsibility of synthesis and decision-making with multiple stakeholders involved.</ContentParagraph>
-                                    <ContentParagraph>I had to emphasize my ability to  ① lead cross-functional collaboration,
-                                        ② communicate confident decisions with clarity, and ③ take accountability for outcomes. — even when information was incomplete or opinions conflicted.</ContentParagraph>
+                            <ContentContainer isFull={true}>
+                                <div className="w-[700px] float-right">
+                                    <Title text="Reflection" />
+                                    <ContentParagraph>This project reinforced the importance of designing systems rather than individual screens. Instead of focusing on isolated dashboards, I approached the Analytics Module as a structured framework that could scale across different ESG dimensions while maintaining consistency and clarity.</ContentParagraph>
+                                    <ContentParagraph>A key learning was that designing for data is not just about visualization, but about enabling decision-making. The challenge was to translate complex and fragmented ESG datasets into a format that users can easily understand and act upon.</ContentParagraph>
                                 </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <img src={"/images/ownership.png"} width={"700px"} />
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="Feedback Handling" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Throughout the project, feedback came from many directions — clients, sales, customer support, engineers, and internal stakeholders — each with different priorities and expectations. The challenge was learning how to absorb large volumes of feedback without becoming reactive or design-by-committee. </ContentParagraph>
-                                    <ContentParagraph>I needed to ① distinguish between opinion and evidence, ② validate assumptions through research, and ③ decide which feedback aligned with user needs and business objectives.</ContentParagraph>
+                                <div className="float-right pt-[64px]">
+                                    <img src={"/images/reflection-quote.png"} width={"725px"} />
                                 </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <img src={"/images/feedback.png"} width={"700px"} />
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="Limited Information on Competitors" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Unlike many consumer or typical SaaS products, researching competitor ESG tools was difficult due to limited access and transparency. Most ESG platforms require company registration, verified business details, and long onboarding processes before users can explore the product. On top of that, ESG standards and reporting practices vary widely across regions and industries.</ContentParagraph>
-                                    <ContentParagraph>To work around this, I ① focused less on direct UI comparisons and more on  ② understanding real user needs, workflows, and pain points through research. I supported this approach with stakeholder interviews, customer feedback, regulatory guidelines, and usability insights from our own product.</ContentParagraph>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <div className="mt-[15px] float-right  mb-[45px]">
-                                        <img src={"/images/competitor.png"} width={"700px"} />
-                                    </div>
-
-                                } />
-                            <ContentDivider />
-                        </div>
-                    </ContentSectionWrapper>
-
-                    <ContentSectionWrapper>
-                        <div ref={(nav) => { if (nav) { navRefs.current[7] = nav } }}>
-                            <ContentContainer>
-                                <Title text="IMPACT" />
-                                <ContentParagraph>With the solution in place, we look at the results. This section demonstrates how the redesign improved usability, confidence, and efficiency through measurable outcomes, tying design changes to real user behavior and business impact.</ContentParagraph>
-                            </ContentContainer>
-                            <ContentDivider />
-
-                            <HideableComponent title="Background" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Do you remember the product north stars, that we mentioned on very first introduction section? If you don’t, here are these</ContentParagraph>
-
-                                    <div className="flex gap-4 mt-[20px]">
-                                        <BusinessProblemCard icon="/images/cake.png" text="1. Ease of use" />
-                                        <BusinessProblemCard icon="/images/file_box.png" text="2. Low confidence in data accuracy" />
-                                        <BusinessProblemCard icon="/images/boomerang.png" text="3. Drop-offs and poor retention" />
-                                    </div>
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <></>
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="1. Ease of Use" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Ease of use directly affects how efficiently users can complete ESG assessments without external help. By reducing complexity, we aimed to enable users to complete tasks independently,  lowering support dependency while increasing productivity and completion rates.</ContentParagraph>
-                                    <img src={"/images/ease-of-use.png"} width={"100%"} />
-                                    <div className="pt-[60px]">
-                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
-                                        <br />
-                                        <ContentParagraph>Improvements in usability directly reduced internal costs and increased customer efficiency.</ContentParagraph>
-                                        <br />
-                                        <div className="flex pt-[15px]">
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Reduced support costs" />
-                                            </div>
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Shorter time to close deals" />
-                                            </div>
-                                        </div>
-                                        <div className="flex pt-[15px]">
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Higher internal team efficiency" />
-                                            </div>
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Higher perceived product maturity" />
-                                            </div>
-                                        </div>
-                                        <div className="pt-[15px]">
-                                            <TickTextComponent text="Resources shifted from “hand-holding” to higher-value work" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <></>
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="2. Trust and Data Accuracy" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>Trust is the foundation of an ESG product. Users must feel confident that their inputs are interpreted correctly and that results are accurate and auditable. This initiative focused on improving transparency, terminology clarity, and data validation to strengthen confidence in the final.</ContentParagraph>
-                                    <img src={"/images/data-accuracy.png"} width={"100%"} />
-                                    <div className="pt-[60px]">
-                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
-                                        <br />
-                                        <ContentParagraph>Stronger confidence in results increased credibility and positioned the product as a reliable ESG solution.</ContentParagraph>
-                                        <br />
-                                        <div className="pt-[15px]">
-                                            <TickTextComponent text="Improved credibility of results" />
-                                        </div>
-                                        <div className="pt-[15px]">
-                                            <TickTextComponent text="Stronger brand trust" />
-                                        </div>
-                                        <div className="pt-[15px]">
-                                            <TickTextComponent text="Higher willingness to pay" />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <></>
-                                } />
-                            <ContentDivider />
-
-                            <HideableComponent title="3. Drop-offs and Poor Retention" children={
-                                <div className="pt-[40px]">
-                                    <ContentParagraph>High friction during critical steps previously caused users to abandon the assessment or avoid returning altogether. By smoothing the end-to-end journey and reducing cognitive load, the goal was to increase completion, encourage repeat usage, and improve long-term adoption of the ESG Calculator.</ContentParagraph>
-                                    <ContentParagraph>Below are the metrics proving our enhancement in this section —</ContentParagraph>
-                                    <img src={"/images/retention.png"} width={"100%"} />
-                                    <div className="pt-[60px]">
-                                        <h2 className={`text-[${FontSizes.medium}] text-[${Colors.title}] tracking-wider`}>Impact upon Business</h2>
-                                        <br />
-                                        <ContentParagraph>Lower friction and clearer value improved activation, retention, and long-term business performance.</ContentParagraph>
-                                        <br />
-                                        <div className="flex pt-[15px]">
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Higher activation rate" />
-                                            </div>
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Lower churn" />
-                                            </div>
-                                        </div>
-                                        <div className="flex pt-[15px]">
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Higher renewal rates" />
-                                            </div>
-                                            <div className="w-[50%]">
-                                                <TickTextComponent text="Stronger long-term revenue stability" />
-                                            </div>
-                                        </div>
-                                        <div className="pt-[15px]">
-                                            <TickTextComponent text="Product value becomes tangible, not theoretical" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            }
-                                fullWidhtChildren={
-                                    <></>
-                                } />
-
-                        </div>
-                        <ContentContainer py={"0px"} isFull={true}>
-                            <ContentDivider isFull={true} />
-                        </ContentContainer>
-                    </ContentSectionWrapper>
-
-                    <ContentSectionWrapper>
-                        <div ref={(nav) => { if (nav) { navRefs.current[8] = nav } }}>
-                            <ContentContainer>
-                                <Title text="RETROSPECTIVE" />
-                                <ContentParagraph>This retrospective marks the conclusion of the case study. Leading the end-to-end redesign of the ESG calculation experience was a rewarding journey that strengthened my ability to navigate complexity, align cross-functional teams, and turn research insights into real business impact.</ContentParagraph>
-                                <ContentParagraph>
-                                    Through strong teamwork and a shared commitment to a research-driven design process, the project delivered meaningful product improvements and received positive feedback from company leadership.
-                                </ContentParagraph>
-                                <ContentParagraph>
-                                    <span className="text-black">
-                                        This is a data-backed story I am proud to share.
-                                    </span>
-                                </ContentParagraph>
                             </ContentContainer>
                         </div>
                     </ContentSectionWrapper>
                 </div>
             </div >
-            <div className="py-[100px] px-[20px]">
-                <img src={"/images/team.png"} className="w-[100%]" />
-            </div>
         </div >
     )
 }
@@ -2474,11 +1892,12 @@ const Title: FC<TitleProps> = ({ text }) => {
 }
 
 type ContentParagraphProps = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    lineHeight?: string
 }
-const ContentParagraph: FC<ContentParagraphProps> = ({ children }) => {
+const ContentParagraph: FC<ContentParagraphProps> = ({ children, lineHeight }) => {
     return (
-        <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[20px]`}>{children}</p>
+        <p className={`text-[${FontSizes.small}] text-[${Colors.content}] pb-[20px]`} style={{ lineHeight: lineHeight || '' }}>{children}</p>
     )
 }
 
